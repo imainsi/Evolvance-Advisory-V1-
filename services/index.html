@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Evolvance Advisory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:     #0B1F3A;
+      --slate:    #3E5A80;
+      --charcoal: #111827;
+      --gray:     #E6E8EC;
+      --offwhite: #FAFAFB;
+      --white:    #FFFFFF;
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'Montserrat', system-ui, sans-serif;
+      --nav-h:    76px;
+      --bar-h:    42px;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══════════════════════════
+       NAV
+    ══════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 64px;
+      background: var(--navy);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-logo {
+      display: flex; flex-direction: column;
+      line-height: 1; text-decoration: none;
+    }
+    .nav-logo-primary {
+      font-family: var(--serif); font-weight: 600; font-size: 26px;
+      letter-spacing: 0.18em; color: var(--white); text-transform: uppercase;
+    }
+    .nav-logo-secondary {
+      font-family: var(--sans); font-weight: 300; font-size: 9px;
+      letter-spacing: 0.36em; color: rgba(255,255,255,0.28);
+      text-transform: uppercase; margin-top: 6px;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 48px; list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--sans); font-size: 11px; font-weight: 400;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.48); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-exp { display: flex; align-items: baseline; gap: 7px; }
+    .nav-exp-num {
+      font-family: var(--serif); font-weight: 600; font-size: 20px;
+      color: rgba(255,255,255,0.45);
+    }
+    .nav-exp-text {
+      font-family: var(--sans); font-size: 8px; font-weight: 300;
+      letter-spacing: 0.11em; text-transform: uppercase;
+      color: rgba(255,255,255,0.20); line-height: 1.5;
+    }
+    .nav-vsep { width: 1px; height: 24px; background: rgba(255,255,255,0.12); }
+    .nav-cta {
+      font-family: var(--sans); font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.30);
+      padding: 11px 24px; white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-cta:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.6); }
+
+    /* ══════════════════════════
+       PAGE
+    ══════════════════════════ */
+    .page {
+      position: fixed;
+      top: var(--nav-h); left: 0; right: 0; bottom: var(--bar-h);
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
+
+    /* ══ SIDEBAR — onglets ══ */
+    .sidebar {
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 52px 0 40px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .sidebar-top {}
+
+    .sidebar-eyebrow {
+      font-family: var(--sans); font-size: 9px; font-weight: 500;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(255,255,255,0.28); padding: 0 40px; margin-bottom: 40px;
+      display: block;
+    }
+
+    .tab-list {
+      display: flex; flex-direction: column;
+    }
+    .tab {
+      display: flex; flex-direction: column;
+      padding: 20px 40px;
+      cursor: pointer;
+      border-left: 2px solid transparent;
+      transition: all 0.2s;
+      gap: 4px;
+    }
+    .tab:hover { background: rgba(255,255,255,0.03); }
+    .tab.active {
+      border-left-color: var(--slate);
+      background: rgba(255,255,255,0.04);
+    }
+    .tab-num {
+      font-family: var(--sans); font-size: 8px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--slate); opacity: 0.6;
+    }
+    .tab-name {
+      font-family: var(--serif); font-weight: 500; font-size: 18px;
+      color: rgba(255,255,255,0.5); transition: color 0.2s;
+      line-height: 1.2;
+    }
+    .tab.active .tab-name { color: var(--white); }
+    .tab:hover .tab-name { color: rgba(255,255,255,0.8); }
+
+    /* Sidebar bottom — manifesto line */
+    .sidebar-bottom {
+      padding: 0 40px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 24px;
+    }
+    .sidebar-quote {
+      font-family: var(--serif); font-style: italic;
+      font-size: 13px; line-height: 1.6;
+      color: rgba(255,255,255,0.18);
+    }
+
+    /* ══ CONTENT AREA ══ */
+    .content {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .panel.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Panel left */
+    .panel-left {
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding: 52px 56px 44px 64px;
+      background: var(--offwhite);
+      border-right: 1px solid var(--gray);
+    }
+    .panel-top {}
+    .panel-label {
+      font-family: var(--sans); font-size: 9px; font-weight: 500;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--slate); display: block; margin-bottom: 16px;
+    }
+    .panel-title {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(32px, 3.5vw, 48px);
+      line-height: 1.08; color: var(--navy); margin-bottom: 20px;
+    }
+    .panel-title em { font-style: italic; color: var(--slate); }
+    .panel-why {
+      font-family: var(--serif); font-style: italic;
+      font-size: 17px; line-height: 1.6;
+      color: var(--charcoal); opacity: 0.6; max-width: 360px;
+    }
+
+    .panel-bottom {}
+    .panel-outcome-label {
+      font-family: var(--sans); font-size: 8px; font-weight: 500;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--slate); opacity: 0.7; display: block; margin-bottom: 10px;
+    }
+    .panel-outcome {
+      font-family: var(--serif); font-size: 18px;
+      line-height: 1.5; color: var(--navy); opacity: 0.8;
+    }
+
+    /* Panel right */
+    .panel-right {
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 52px 64px 44px 56px;
+      background: var(--white);
+    }
+    .areas-label {
+      font-family: var(--sans); font-size: 9px; font-weight: 500;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--slate); display: block; margin-bottom: 28px;
+    }
+    .areas-list {
+      display: flex; flex-direction: column;
+    }
+    .area-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray);
+    }
+    .area-item:first-child { border-top: 1px solid var(--gray); }
+    .area-dot {
+      width: 4px; height: 4px;
+      background: var(--slate); border-radius: 50%; opacity: 0.4; flex-shrink: 0;
+    }
+    .area-name {
+      font-family: var(--serif); font-size: 18px;
+      color: var(--navy); line-height: 1;
+    }
+
+    /* ══ BOTTOM BAR ══ */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: var(--bar-h);
+      background: #060f1d;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 64px;
+    }
+    .bar-left { display: flex; align-items: center; gap: 16px; }
+    .bar-label {
+      font-family: var(--sans); font-size: 8px; font-weight: 500;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: rgba(255,255,255,0.22); white-space: nowrap;
+    }
+    .bar-sep { width: 18px; height: 1px; background: var(--slate); opacity: 0.35; }
+    .bar-list { display: flex; align-items: center; gap: 12px; }
+    .bar-item {
+      font-family: var(--sans); font-size: 8px; font-weight: 400;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.34);
+    }
+    .bar-dot { width: 2px; height: 2px; background: rgba(255,255,255,0.15); border-radius: 50%; }
+    .bar-tagline {
+      font-family: var(--serif); font-style: italic;
+      font-size: 12px; color: rgba(255,255,255,0.13);
+    }
+
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-primary">Evolvance</span>
+      <span class="nav-logo-secondary">Advisory</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../services/index.html" class="active">Services</a></li>
+      <li><a href="../industries/index.html">Industries</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../contact/index.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-exp">
+        <span class="nav-exp-num">20+</span>
+        <span class="nav-exp-text">Years of experience<br>in financial services</span>
+      </div>
+      <div class="nav-vsep"></div>
+      <a href="../contact/index.html" class="nav-cta">Schedule a Conversation</a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-top">
+        <span class="sidebar-eyebrow">What we do</span>
+        <div class="tab-list">
+          <div class="tab active" data-panel="assessment">
+            <span class="tab-num">I</span>
+            <span class="tab-name">Transformation Assessment</span>
+          </div>
+          <div class="tab" data-panel="leadership">
+            <span class="tab-num">II</span>
+            <span class="tab-name">Transformation Leadership</span>
+          </div>
+          <div class="tab" data-panel="technology">
+            <span class="tab-num">III</span>
+            <span class="tab-name">Technology &amp; AI Advisory</span>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-bottom">
+        <p class="sidebar-quote">We do not sell theory.<br>We help organizations transform<br>vision into performance.</p>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+      <!-- PANEL I — Assessment -->
+      <div class="panel active" id="panel-assessment">
+        <div class="panel-left">
+          <div class="panel-top">
+            <span class="panel-label">I — Assessment</span>
+            <h2 class="panel-title">Transformation<br><em>Assessment</em></h2>
+            <p class="panel-why">Many transformations generate activity. Far fewer generate measurable value. The difference starts with an honest assessment.</p>
+          </div>
+          <div class="panel-bottom">
+            <span class="panel-outcome-label">What you get</span>
+            <p class="panel-outcome">A clear view of strengths, weaknesses, priorities and the honest path forward.</p>
+          </div>
+        </div>
+        <div class="panel-right">
+          <span class="areas-label">Areas covered</span>
+          <div class="areas-list">
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Strategy &amp; Vision Alignment</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Governance &amp; Decision-Making</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Organization &amp; Change Readiness</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Technology &amp; Adoption</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Risk Identification</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Value Creation Assessment</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL II — Leadership -->
+      <div class="panel" id="panel-leadership">
+        <div class="panel-left">
+          <div class="panel-top">
+            <span class="panel-label">II — Leadership</span>
+            <h2 class="panel-title">Transformation<br><em>Leadership</em></h2>
+            <p class="panel-why">A decision alone changes nothing. It must be understood, accepted, executed and sustained. That is where most transformations succeed or fail.</p>
+          </div>
+          <div class="panel-bottom">
+            <span class="panel-outcome-label">What you get</span>
+            <p class="panel-outcome">Better alignment. Faster decisions. Stronger execution. Results that last.</p>
+          </div>
+        </div>
+        <div class="panel-right">
+          <span class="areas-label">Areas covered</span>
+          <div class="areas-list">
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Transformation Leadership</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Program Governance</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Executive Steering Support</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Stakeholder Alignment</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Decision Facilitation</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Change Leadership</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL III — Technology -->
+      <div class="panel" id="panel-technology">
+        <div class="panel-left">
+          <div class="panel-top">
+            <span class="panel-label">III — Technology &amp; AI</span>
+            <h2 class="panel-title">Technology &amp;<br><em>AI Advisory</em></h2>
+            <p class="panel-why">Technology matters. Data matters. AI matters. But they are tools, not outcomes. Their value is measured by the results they create.</p>
+          </div>
+          <div class="panel-bottom">
+            <span class="panel-outcome-label">What you get</span>
+            <p class="panel-outcome">Better prioritization. Improved adoption. Reduced risk. Higher return on investment.</p>
+          </div>
+        </div>
+        <div class="panel-right">
+          <span class="areas-label">Areas covered</span>
+          <div class="areas-list">
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">AI Strategy &amp; Roadmap</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">AI Adoption &amp; Change</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Technology Transformation</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Digital Transformation</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Process Optimization</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Technology Value Assessment</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="bar-left">
+      <span class="bar-label">Who we help</span>
+      <div class="bar-sep"></div>
+      <div class="bar-list">
+        <span class="bar-item">Banking</span>
+        <span class="bar-dot"></span>
+        <span class="bar-item">Insurance</span>
+        <span class="bar-dot"></span>
+        <span class="bar-item">Capital Markets</span>
+        <span class="bar-dot"></span>
+        <span class="bar-item">Wealth &amp; Investment</span>
+        <span class="bar-dot"></span>
+        <span class="bar-item">FinTech</span>
+      </div>
+    </div>
+    <span class="bar-tagline">Turning ambition into measurable value.</span>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.panel;
+
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        tab.classList.add('active');
+        document.getElementById('panel-' + target).classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

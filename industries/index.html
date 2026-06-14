@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Industries — Evolvance Advisory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:     #0B1F3A;
+      --slate:    #3E5A80;
+      --charcoal: #111827;
+      --gray:     #E6E8EC;
+      --offwhite: #FAFAFB;
+      --white:    #FFFFFF;
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'Montserrat', system-ui, sans-serif;
+      --nav-h:    76px;
+      --bar-h:    42px;
+    }
+    html, body {
+      height: 100%; overflow: hidden;
+      font-family: var(--sans); -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h); display: flex; align-items: center;
+      justify-content: space-between; padding: 0 64px;
+      background: var(--navy); border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
+    .nav-logo-primary {
+      font-family: var(--serif); font-weight: 600; font-size: 26px;
+      letter-spacing: 0.18em; color: var(--white); text-transform: uppercase;
+    }
+    .nav-logo-secondary {
+      font-family: var(--sans); font-weight: 300; font-size: 9px;
+      letter-spacing: 0.36em; color: rgba(255,255,255,0.28);
+      text-transform: uppercase; margin-top: 6px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 48px; list-style: none; }
+    .nav-links a {
+      font-family: var(--sans); font-size: 11px; font-weight: 400;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.48); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-exp { display: flex; align-items: baseline; gap: 7px; }
+    .nav-exp-num { font-family: var(--serif); font-weight: 600; font-size: 20px; color: rgba(255,255,255,0.45); }
+    .nav-exp-text {
+      font-family: var(--sans); font-size: 8px; font-weight: 300;
+      letter-spacing: 0.11em; text-transform: uppercase;
+      color: rgba(255,255,255,0.20); line-height: 1.5;
+    }
+    .nav-vsep { width: 1px; height: 24px; background: rgba(255,255,255,0.12); }
+    .nav-cta {
+      font-family: var(--sans); font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.30); padding: 11px 24px; white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-cta:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.6); }
+
+    /* PAGE */
+    .page {
+      position: fixed;
+      top: var(--nav-h); left: 0; right: 0; bottom: var(--bar-h);
+      display: grid; grid-template-columns: 280px 1fr;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      background: var(--navy); display: flex; flex-direction: column;
+      justify-content: space-between; padding: 52px 0 40px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .sidebar-eyebrow {
+      font-family: var(--sans); font-size: 9px; font-weight: 500;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(255,255,255,0.28); padding: 0 40px; margin-bottom: 40px; display: block;
+    }
+    .tab-list { display: flex; flex-direction: column; }
+    .tab {
+      display: flex; flex-direction: column; padding: 18px 40px;
+      cursor: pointer; border-left: 2px solid transparent;
+      transition: all 0.2s; gap: 3px;
+    }
+    .tab:hover { background: rgba(255,255,255,0.03); }
+    .tab.active { border-left-color: var(--slate); background: rgba(255,255,255,0.04); }
+    .tab-name {
+      font-family: var(--serif); font-weight: 500; font-size: 16px;
+      color: rgba(255,255,255,0.45); transition: color 0.2s; line-height: 1.25;
+    }
+    .tab.active .tab-name { color: var(--white); }
+    .tab:hover .tab-name { color: rgba(255,255,255,0.75); }
+    .sidebar-bottom {
+      padding: 24px 40px 0; border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .sidebar-quote {
+      font-family: var(--serif); font-style: italic;
+      font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.18);
+    }
+
+    /* CONTENT */
+    .content { position: relative; overflow: hidden; }
+    .panel {
+      position: absolute; inset: 0;
+      display: grid; grid-template-columns: 1fr 1fr;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .panel.active { opacity: 1; pointer-events: all; }
+
+    /* Panel left */
+    .panel-left {
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 52px 52px 44px 64px;
+      background: var(--offwhite); border-right: 1px solid var(--gray);
+    }
+    .panel-label {
+      font-family: var(--sans); font-size: 9px; font-weight: 500;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--slate); display: block; margin-bottom: 16px;
+    }
+    .panel-title {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(32px, 3.5vw, 48px);
+      line-height: 1.08; color: var(--navy); margin-bottom: 20px;
+    }
+    .panel-title em { font-style: italic; color: var(--slate); }
+    .panel-challenge {
+      font-family: var(--serif); font-style: italic;
+      font-size: 17px; line-height: 1.65;
+      color: var(--charcoal); opacity: 0.6; max-width: 360px;
+    }
+    .panel-outcome-label {
+      font-family: var(--sans); font-size: 8px; font-weight: 500;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--slate); opacity: 0.7; display: block; margin-bottom: 10px;
+    }
+    .panel-outcome {
+      font-family: var(--serif); font-size: 17px;
+      line-height: 1.5; color: var(--navy); opacity: 0.75;
+    }
+
+    /* Panel right */
+    .panel-right {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 52px 64px 44px 52px; background: var(--white);
+    }
+    .areas-label {
+      font-family: var(--sans); font-size: 9px; font-weight: 500;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--slate); display: block; margin-bottom: 28px;
+    }
+    .areas-list { display: flex; flex-direction: column; }
+    .area-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 13px 0; border-bottom: 1px solid var(--gray);
+    }
+    .area-item:first-child { border-top: 1px solid var(--gray); }
+    .area-dot { width: 4px; height: 4px; background: var(--slate); border-radius: 50%; opacity: 0.4; flex-shrink: 0; }
+    .area-name { font-family: var(--serif); font-size: 17px; color: var(--navy); line-height: 1; }
+
+    /* BOTTOM BAR */
+    .bottom-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; height: var(--bar-h);
+      background: #060f1d; display: flex; align-items: center;
+      justify-content: space-between; padding: 0 64px;
+    }
+    .bar-left { display: flex; align-items: center; gap: 16px; }
+    .bar-label {
+      font-family: var(--sans); font-size: 8px; font-weight: 500;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: rgba(255,255,255,0.22); white-space: nowrap;
+    }
+    .bar-sep { width: 18px; height: 1px; background: var(--slate); opacity: 0.35; }
+    .bar-list { display: flex; align-items: center; gap: 12px; }
+    .bar-item {
+      font-family: var(--sans); font-size: 8px; font-weight: 400;
+      letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.34);
+    }
+    .bar-dot { width: 2px; height: 2px; background: rgba(255,255,255,0.15); border-radius: 50%; }
+    .bar-tagline { font-family: var(--serif); font-style: italic; font-size: 12px; color: rgba(255,255,255,0.13); }
+
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-primary">Evolvance</span>
+      <span class="nav-logo-secondary">Advisory</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../industries/index.html" class="active">Industries</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../contact/index.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-exp">
+        <span class="nav-exp-num">20+</span>
+        <span class="nav-exp-text">Years of experience<br>in financial services</span>
+      </div>
+      <div class="nav-vsep"></div>
+      <a href="../contact/index.html" class="nav-cta">Schedule a Conversation</a>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="sidebar">
+      <div class="sidebar-top">
+        <span class="sidebar-eyebrow">Who we help</span>
+        <div class="tab-list">
+          <div class="tab active" data-panel="banking"><span class="tab-name">Banking</span></div>
+          <div class="tab" data-panel="insurance"><span class="tab-name">Insurance</span></div>
+          <div class="tab" data-panel="capital"><span class="tab-name">Capital Markets</span></div>
+          <div class="tab" data-panel="wealth"><span class="tab-name">Wealth &amp; Investment Management</span></div>
+          <div class="tab" data-panel="fintech"><span class="tab-name">FinTech &amp; Technology Providers</span></div>
+        </div>
+      </div>
+      <div class="sidebar-bottom">
+        <p class="sidebar-quote">Value is not sector-specific.<br>But the path to it always is.</p>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- BANKING -->
+      <div class="panel active" id="panel-banking">
+        <div class="panel-left">
+          <div>
+            <span class="panel-label">Financial Services</span>
+            <h2 class="panel-title"><em>Banking</em></h2>
+            <p class="panel-challenge">Banks are under pressure to transform core systems, adopt AI and reduce costs — while maintaining performance, stability and regulatory compliance. Most struggle not because they lack ambition, but because decisions do not become results.</p>
+          </div>
+          <div>
+            <span class="panel-outcome-label">What we bring</span>
+            <p class="panel-outcome">Leadership experience inside banking transformation. Honest advisory. Measurable outcomes.</p>
+          </div>
+        </div>
+        <div class="panel-right">
+          <span class="areas-label">Where we help</span>
+          <div class="areas-list">
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Core Banking Transformation</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Digital Banking Strategy</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">AI Adoption &amp; Integration</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Organizational Change</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Operating Model Redesign</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Regulatory Program Execution</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INSURANCE -->
+      <div class="panel" id="panel-insurance">
+        <div class="panel-left">
+          <div>
+            <span class="panel-label">Financial Services</span>
+            <h2 class="panel-title"><em>Insurance</em></h2>
+            <p class="panel-challenge">Insurers face a profound shift — in customer expectations, distribution models and the role of data and AI. Transformation is no longer optional. The question is whether it creates value or just consumes it.</p>
+          </div>
+          <div>
+            <span class="panel-outcome-label">What we bring</span>
+            <p class="panel-outcome">Clarity on where to focus. Leadership to execute. Results that justify the investment.</p>
+          </div>
+        </div>
+        <div class="panel-right">
+          <span class="areas-label">Where we help</span>
+          <div class="areas-list">
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Technology Modernization</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Distribution Transformation</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Data &amp; AI Strategy</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Operating Model Transformation</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Customer Experience Programs</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Change Leadership</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAPITAL MARKETS -->
+      <div class="panel" id="panel-capital">
+        <div class="panel-left">
+          <div>
+            <span class="panel-label">Financial Services</span>
+            <h2 class="panel-title">Capital<br><em>Markets</em></h2>
+            <p class="panel-challenge">Capital markets firms navigate complex technology investments, evolving regulatory demands and the pressure to reduce operational costs. Execution discipline is everything — and rarely enough.</p>
+          </div>
+          <div>
+            <span class="panel-outcome-label">What we bring</span>
+            <p class="panel-outcome">Governance that works. Execution that delivers. Value that is measurable.</p>
+          </div>
+        </div>
+        <div class="panel-right">
+          <span class="areas-label">Where we help</span>
+          <div class="areas-list">
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Post-Trade Transformation</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Technology Investment Prioritization</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Program Governance</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Regulatory Program Execution</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Operational Efficiency</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">AI &amp; Data Integration</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEALTH -->
+      <div class="panel" id="panel-wealth">
+        <div class="panel-left">
+          <div>
+            <span class="panel-label">Financial Services</span>
+            <h2 class="panel-title">Wealth &amp; Investment<br><em>Management</em></h2>
+            <p class="panel-challenge">Wealth and asset managers are redefining how they serve clients, leverage technology and compete for the next generation of investors. The stakes are high. The margin for poor execution is low.</p>
+          </div>
+          <div>
+            <span class="panel-outcome-label">What we bring</span>
+            <p class="panel-outcome">Strategic clarity. Execution discipline. Client experience that creates lasting value.</p>
+          </div>
+        </div>
+        <div class="panel-right">
+          <span class="areas-label">Where we help</span>
+          <div class="areas-list">
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Client Experience Transformation</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Platform Modernization</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Digital Advisory Strategy</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">AI &amp; Data Strategy</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Growth Program Leadership</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Operating Model Evolution</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINTECH -->
+      <div class="panel" id="panel-fintech">
+        <div class="panel-left">
+          <div>
+            <span class="panel-label">Technology Providers</span>
+            <h2 class="panel-title">FinTech &amp;<br><em>Technology Providers</em></h2>
+            <p class="panel-challenge">FinTechs and technology providers serving financial institutions move fast — but enterprise readiness, go-to-market discipline and the ability to scale require a different kind of thinking.</p>
+          </div>
+          <div>
+            <span class="panel-outcome-label">What we bring</span>
+            <p class="panel-outcome">Industry credibility. Go-to-market sharpness. The confidence to scale with purpose.</p>
+          </div>
+        </div>
+        <div class="panel-right">
+          <span class="areas-label">Where we help</span>
+          <div class="areas-list">
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Go-to-Market Strategy</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Enterprise Readiness</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Product Positioning</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Partnership Strategy</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Growth Acceleration</span></div>
+            <div class="area-item"><span class="area-dot"></span><span class="area-name">Investor &amp; Board Readiness</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="bar-left">
+      <span class="bar-label">Who we help</span>
+      <div class="bar-sep"></div>
+      <div class="bar-list">
+        <span class="bar-item">Banking</span><span class="bar-dot"></span>
+        <span class="bar-item">Insurance</span><span class="bar-dot"></span>
+        <span class="bar-item">Capital Markets</span><span class="bar-dot"></span>
+        <span class="bar-item">Wealth &amp; Investment</span><span class="bar-dot"></span>
+        <span class="bar-item">FinTech</span>
+      </div>
+    </div>
+    <span class="bar-tagline">Turning ambition into measurable value.</span>
+  </div>
+
+  <script>
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
