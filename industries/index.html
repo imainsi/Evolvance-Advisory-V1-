@@ -190,14 +190,56 @@
     .bar-tagline { font-family: var(--serif); font-style: italic; font-size: 12px; color: rgba(255,255,255,0.13); }
 
 
-    /* ── HAMBURGER ── */
-    .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
-    .nav-hamburger span { display:block; width:22px; height:2px; background:rgba(255,255,255,0.7); }
-    .nav-mobile-menu { display:none; position:fixed; top:60px; left:0; right:0; background:var(--navy); border-bottom:1px solid rgba(255,255,255,0.08); z-index:99; padding:8px 0; }
-    .nav-mobile-menu a { display:block; font-family:var(--sans); font-size:11px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.7); text-decoration:none; padding:14px 20px; border-bottom:1px solid rgba(255,255,255,0.05); transition:color 0.2s; }
-    .nav-mobile-menu a:last-child { border-bottom:none; }
-    .nav-mobile-menu a:hover, .nav-mobile-menu a.active { color:var(--white); }
-    .nav-mobile-menu.open { display:block; }
+    /* ══ MOBILE MENU OVERLAY ══ */
+    .mobile-menu { display:none; position:fixed; inset:0; z-index:199; background:var(--navy); flex-direction:column; justify-content:center; align-items:center; padding-top:60px; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-family:var(--serif); font-weight:400; font-size:34px; color:rgba(255,255,255,0.7); text-decoration:none; padding:16px 40px; letter-spacing:0.05em; border-bottom:1px solid rgba(255,255,255,0.06); width:100%; text-align:center; transition:color 0.2s; }
+    .mobile-menu a:first-child { border-top:1px solid rgba(255,255,255,0.06); }
+    .mobile-menu a.active, .mobile-menu a:hover { color:var(--white); }
+    .mobile-menu-cta { margin-top:28px !important; font-family:var(--sans) !important; font-size:11px !important; font-weight:500 !important; letter-spacing:0.16em !important; text-transform:uppercase !important; border:1px solid rgba(255,255,255,0.3) !important; padding:14px 32px !important; }
+    .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; background:none; border:none; }
+    .nav-hamburger span { display:block; width:24px; height:2px; background:rgba(255,255,255,0.8); border-radius:1px; }
+
+
+    @media (max-width: 768px) {
+      :root { --nav-h:60px; }
+      nav { padding:0 20px; }
+      .nav-logo-primary { font-size:20px; }
+      .nav-logo-secondary { font-size:7px; }
+      .nav-links { display:none; }
+      .nav-exp, .nav-vsep { display:none; }
+      .nav-cta { display:none; }
+      .nav-hamburger { display:flex; }
+
+      html, body { overflow:auto; height:auto; }
+      .page { position:relative; top:auto; left:auto; right:auto; bottom:auto; display:block; margin-top:60px; grid-template-columns:1fr; }
+      .sidebar { position:relative; width:100%; height:auto; padding:16px 0 0; border-right:none; border-bottom:1px solid rgba(255,255,255,0.07); }
+      .sidebar-eyebrow { padding:0 20px; margin-bottom:12px; font-size:8px; }
+      .tab-list { flex-direction:row; overflow-x:auto; padding:0 16px 10px; -webkit-overflow-scrolling:touch; }
+      .tab { padding:8px 14px; border-left:none; border-bottom:2px solid transparent; white-space:nowrap; }
+      .tab.active { border-left:none; border-bottom-color:var(--slate); background:rgba(255,255,255,0.04); }
+      .tab-num { display:none; }
+      .tab-name { font-size:12px; }
+      .sidebar-bottom { display:none; }
+      .content { position:relative; height:auto; }
+      .panel { position:relative; display:none; grid-template-columns:1fr; opacity:1; pointer-events:all; }
+      .panel.active { display:flex; flex-direction:column; }
+      .panel-left { padding:20px; border-right:none; border-bottom:1px solid var(--gray); justify-content:flex-start; gap:10px; }
+      .panel-label { font-size:8px; margin-bottom:0; }
+      .panel-title { font-size:26px; line-height:1.1; margin-bottom:0; }
+      .panel-challenge { font-size:12px; line-height:1.55; }
+      .panel-outcome-label { font-size:8px; margin-top:12px; margin-bottom:6px; }
+      .panel-outcome { font-size:15px; line-height:1.4; }
+      .panel-right { padding:16px 20px 20px; }
+      .areas-label { font-size:8px; margin-bottom:16px; }
+      .area-item { padding:9px 0; }
+      .area-name { font-size:15px; }
+      .bottom-bar { position:relative; height:auto; padding:12px 20px; flex-direction:column; align-items:flex-start; gap:4px; }
+      .bar-list { flex-wrap:wrap; gap:6px; }
+      .bar-item { font-size:8px; }
+      .bar-tagline { display:block; font-size:11px; }
+
+    }
 
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   </style>
@@ -222,16 +264,17 @@
       </div>
       <div class="nav-vsep"></div>
       <a href="../contact/index.html" class="nav-cta">Schedule a Conversation</a>
-  <button class="nav-hamburger" onclick="this.closest('body').querySelector('.nav-mobile-menu').classList.toggle('open')" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+      <button class="nav-hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
-  <div class="nav-mobile-menu">
+  <div class="mobile-menu">
     <a href="../services/index.html">Services</a>
     <a href="../industries/index.html" class="active">Industries</a>
     <a href="../about/index.html">About</a>
     <a href="../contact/index.html">Contact</a>
+    <a href="../contact/index.html" class="mobile-menu-cta">Schedule a Conversation</a>
   </div>
 
   <div class="page">
@@ -414,35 +457,4 @@
 
 </body>
 </html>
-<style>
-@media (max-width: 768px) {
-  :root { --nav-h:60px; --bar-h:36px; }
-  html, body { overflow:auto; height:auto; }
-  nav { padding:0 20px; height:60px; }
-  .nav-logo-primary { font-size:20px; }
-  .nav-links { display:none; }
-  .nav-hamburger { display:flex; }
-  .nav-exp, .nav-vsep { display:none; }
-  .nav-cta { font-size:9px; padding:8px 12px; }
-  .page { position:relative; top:auto; left:auto; right:auto; bottom:auto; display:block; margin-top:60px; grid-template-columns:none; }
-  .sidebar { position:relative; width:100%; height:auto; padding:24px 0 0; border-right:none; border-bottom:1px solid rgba(255,255,255,0.07); }
-  .sidebar-eyebrow { padding:0 20px; margin-bottom:16px; }
-  .tab-list { flex-direction:row; overflow-x:auto; padding:0 20px 12px; }
-  .tab { padding:10px 16px; border-left:none; border-bottom:2px solid transparent; white-space:nowrap; }
-  .tab.active { border-left:none; border-bottom-color:var(--slate); }
-  .tab-num { display:none; }
-  .tab-name { font-size:13px; }
-  .sidebar-bottom { display:none; }
-  .content { position:relative; height:auto; }
-  .panel { position:relative; display:none; grid-template-columns:1fr; }
-  .panel.active { display:flex; flex-direction:column; opacity:1; pointer-events:all; }
-  .panel-left { padding:28px 20px; border-right:none; border-bottom:1px solid var(--gray); }
-  .panel-title { font-size:28px; }
-  .panel-right { padding:28px 20px; }
-  .area-name { font-size:15px; }
-  .bottom-bar { position:relative; height:auto; padding:12px 20px; flex-direction:column; align-items:flex-start; gap:6px; }
-  .bar-list { flex-wrap:wrap; gap:8px; }
-  .bar-item { font-size:9px; }
-  .bar-tagline { display:block; }
-}
-</style>
+
