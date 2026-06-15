@@ -448,3 +448,44 @@
 
 </body>
 </html>
+<style>
+@media (max-width: 768px) {
+  :root { --nav-h:60px; --bar-h:36px; }
+  html, body { overflow:auto; height:auto; }
+  nav { padding:0 20px; height:60px; }
+  .nav-logo-primary { font-size:20px; }
+  .nav-links { display:none; }
+  .nav-exp, .nav-vsep { display:none; }
+  .nav-cta { font-size:9px; padding:8px 12px; }
+
+  .page {
+    position:relative; top:auto; left:auto; right:auto; bottom:auto;
+    display:block; margin-top:60px; grid-template-columns:none;
+  }
+  .sidebar {
+    position:relative; width:100%; height:auto;
+    padding:24px 0 0; border-right:none; border-bottom:1px solid rgba(255,255,255,0.07);
+  }
+  .sidebar-eyebrow { padding:0 20px; margin-bottom:16px; }
+  .tab-list { flex-direction:row; overflow-x:auto; padding:0 20px 12px; gap:0; }
+  .tab { padding:10px 16px; border-left:none; border-bottom:2px solid transparent; white-space:nowrap; }
+  .tab.active { border-left:none; border-bottom-color:var(--slate); }
+  .tab-num { display:none; }
+  .tab-name { font-size:13px; }
+  .sidebar-bottom { display:none; }
+
+  .content { position:relative; height:auto; }
+  .panel { position:relative; display:none; grid-template-columns:1fr; }
+  .panel.active { display:flex; flex-direction:column; opacity:1; pointer-events:all; }
+  .panel-left { padding:28px 20px; border-right:none; border-bottom:1px solid var(--gray); }
+  .panel-title { font-size:32px; }
+  .panel-why { font-size:14px; }
+  .panel-right { padding:28px 20px; }
+  .area-name { font-size:15px; }
+
+  .bottom-bar { position:relative; height:auto; padding:12px 20px; flex-direction:column; align-items:flex-start; gap:6px; }
+  .bar-list { flex-wrap:wrap; gap:8px; }
+  .bar-item { font-size:9px; }
+  .bar-tagline { display:block; }
+}
+</style>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Evolvance Advisory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      margin-top: 72px;
+    }
+
+    /* Manifesto column */
+    .about-manifesto {}
+    .manifesto-block {
+      background: var(--navy);
+      padding: 56px 52px;
+    }
+    .manifesto-block-label {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--slate);
+      display: block;
+      margin-bottom: 44px;
+    }
+    .manifesto-block-text {
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.82);
+    }
+    .manifesto-block-text p { margin-bottom: 20px; }
+    .manifesto-block-text p:last-child { margin-bottom: 0; }
+    .manifesto-block-text em {
+      font-style: italic;
+      color: rgba(255,255,255,0.45);
+    }
+    .manifesto-rule {
+      width: 32px;
+      height: 1px;
+      background: var(--slate);
+      margin: 32px 0;
+    }
+    .manifesto-sig {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16px;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.6;
+    }
+
+    /* Values column */
+    .about-values-col {}
+    .experience-callout {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 28px 0;
+      border-top: 1px solid var(--gray);
+      border-bottom: 1px solid var(--gray);
+      margin-bottom: 32px;
+    }
+    .experience-number {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 52px;
+      color: var(--navy);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .experience-text {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      opacity: 0.6;
+      line-height: 1.6;
+      max-width: 220px;
+    }
+
+    .about-intro {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--charcoal);
+      opacity: 0.8;
+      margin-bottom: 52px;
+    }
+
+    .values-list {}
+    .value-item {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--gray);
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .value-item:first-child { border-top: 1px solid var(--gray); }
+    .value-name {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--navy);
+      padding-top: 2px;
+    }
+    .value-desc {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--charcoal);
+      opacity: 0.65;
+    }
+
+    .about-placeholder {
+      margin-top: 52px;
+      padding: 32px 36px;
+      border: 1px dashed var(--gray);
+      background: var(--offwhite);
+    }
+    .placeholder-label {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--slate);
+      display: block;
+      margin-bottom: 10px;
+      opacity: 0.6;
+    }
+    .placeholder-text {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--charcoal);
+      opacity: 0.4;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .value-item { grid-template-columns: 1fr; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-primary">Evolvance</span>
+      <span class="nav-logo-secondary">Advisory</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../industries/index.html">Industries</a></li>
+      <li><a href="../about/index.html" class="active">About</a></li>
+      <li><a href="../contact/index.html">Contact</a></li>
+    </ul>
+    <a href="../contact/index.html" class="nav-cta">Schedule a Conversation</a>
+  </nav>
+
+  <div class="page-wrap">
+    <div class="container page-content">
+      <span class="eyebrow">About</span>
+      <h1 class="page-title">Independent.<br><em>Trusted. Experienced.</em></h1>
+
+      <div class="about-grid">
+
+        <!-- Manifesto -->
+        <div class="about-manifesto">
+          <div class="manifesto-block">
+            <span class="manifesto-block-label">Our manifesto</span>
+            <div class="manifesto-block-text">
+              <p>We do not sell theory.<br>We do not sell activity.<br>We do not sell the appearance of progress.</p>
+              <p>We help organizations transform vision into performance.</p>
+              <p>This requires honesty. Because reality does not change when it is ignored. And because difficult truths are always less expensive than failed transformations.</p>
+              <p><em>Sometimes that means challenging assumptions. Sometimes it means asking uncomfortable questions. Sometimes it means walking away from initiatives designed to look successful rather than be successful.</em></p>
+            </div>
+            <div class="manifesto-rule"></div>
+            <p class="manifesto-sig">Our success is not measured by the projects we launch. It is measured by the value that remains after we leave.</p>
+          </div>
+        </div>
+
+        <!-- Values -->
+        <div class="about-values-col">
+          <div class="experience-callout">
+            <span class="experience-number">20+</span>
+            <span class="experience-text">Years of hands-on experience in financial services transformation</span>
+          </div>
+
+          <p class="about-intro">Evolvance Advisory is an independent executive advisory firm built on over two decades of real leadership experience — not theory, not frameworks, but decisions made, transformations led and value created inside financial services organizations.<br><br>We exist at the intersection of leadership, transformation and value creation — not as a consultant, not as a vendor, but as a trusted advisor who understands the weight of the decisions that shape organizations.</p>
+
+          <div class="values-list">
+            <div class="value-item">
+              <span class="value-name">Trusted</span>
+              <span class="value-desc">We act with honesty, accountability and professionalism in everything we do.</span>
+            </div>
+            <div class="value-item">
+              <span class="value-name">Strategic</span>
+              <span class="value-desc">We connect vision, decisions and execution to achieve meaningful outcomes.</span>
+            </div>
+            <div class="value-item">
+              <span class="value-name">Human</span>
+              <span class="value-desc">We place people at the center of every transformation journey.</span>
+            </div>
+            <div class="value-item">
+              <span class="value-name">Transformative</span>
+              <span class="value-desc">We help organizations turn change into tangible and lasting results.</span>
+            </div>
+            <div class="value-item">
+              <span class="value-name">Innovative</span>
+              <span class="value-desc">We embrace new ideas and approaches that create meaningful impact.</span>
+            </div>
+          </div>
+
+          <div class="about-placeholder">
+            <span class="placeholder-label">Coming soon</span>
+            <p class="placeholder-text">Leadership profile and background will be added here.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer>
+      <span class="footer-copy">© 2026 Evolvance Advisory. All rights reserved.</span>
+      <span class="footer-tagline">Turning ambition into measurable value.</span>
+    </footer>
+  </div>
+</body>
+</html>
