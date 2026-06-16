@@ -88,8 +88,8 @@
 
     /* ══ SECTION 1 — HERO ══ */
     .s1 { position:relative; height:100vh; min-height:600px; display:flex; align-items:center; overflow:hidden; }
-    .s1-bg { position:absolute; inset:0; background-image:url('hero.jpg.png'); background-size:cover; background-position:center; transform:scale(1.05); transition:transform 8s ease; }
-    .s1-bg.loaded { transform:scale(1); }
+    @keyframes kenBurns { 0% { transform:scale(1.08) translateX(0px); } 50% { transform:scale(1.14) translateX(-20px); } 100% { transform:scale(1.08) translateX(0px); } }
+    .s1-bg { position:absolute; inset:0; background-image:url('hero.jpg.png'); background-size:cover; background-position:center; animation:kenBurns 20s ease-in-out infinite; }
     .s1-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(11,31,58,0.92) 0%,rgba(11,31,58,0.70) 60%,rgba(11,31,58,0.50) 100%); }
     .s1-content { position:relative; z-index:2; padding:0 80px; max-width:900px; }
     .s1-eyebrow { font-family:var(--sans); font-size:10px; font-weight:500; letter-spacing:0.30em; text-transform:uppercase; color:var(--slate); display:block; margin-bottom:24px; animation:fadeIn 0.8s ease 0.3s both; }
@@ -400,10 +400,11 @@
 
     /* ══ HERO PARALLAX ══ */
     const heroBg = document.getElementById('heroBg');
-    setTimeout(() => heroBg.classList.add('loaded'), 100);
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
-      heroBg.style.transform = `scale(1) translateY(${y * 0.3}px)`;
+      if (y < window.innerHeight) {
+        heroBg.style.transform = `scale(1.08) translateY(${y * 0.15}px)`;
+      }
     }, { passive: true });
 
     /* ══ COUNTER 0 → 20 (loop) ══ */
