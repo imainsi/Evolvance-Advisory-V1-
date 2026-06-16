@@ -25,6 +25,16 @@
     @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
     @keyframes scrollBounce { 0%,100% { transform:translateY(0); opacity:0.4; } 50% { transform:translateY(8px); opacity:1; } }
 
+    /* ══ ACCORDION ══ */
+    document.querySelectorAll('.s3-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') return;
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.s3-item').forEach(i => i.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
+      });
+    });
+
     /* ══ SCROLL REVEAL ══ */
     .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.8s ease, transform 0.8s ease; }
     .reveal.visible { opacity:1; transform:translateY(0); }
@@ -111,26 +121,33 @@
     .s2-diff-name { font-family:var(--serif); font-weight:500; font-size:22px; color:var(--navy); margin-bottom:6px; }
     .s2-diff-desc { font-family:var(--sans); font-size:11px; font-weight:300; line-height:1.75; color:var(--charcoal); opacity:0.55; }
 
-    /* ══ SECTION 3 — SERVICES ══ */
-    .s3 { background:var(--navy); padding:120px 80px; }
-    .s3-inner { max-width:1200px; margin:0 auto; }
+    /* ══ SECTION 3 — SERVICES ACCORDION ══ */
+    .s3 { position:relative; padding:120px 80px; overflow:hidden; }
+    .s3-bg { position:absolute; inset:0; background-image:url('services-bg.jpg.png'); background-size:cover; background-position:center 30%; }
+    .s3-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(11,31,58,0.93) 0%,rgba(11,31,58,0.82) 100%); }
+    .s3-inner { position:relative; z-index:2; max-width:1200px; margin:0 auto; }
     .s3-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:64px; }
     .s3-label { font-family:var(--sans); font-size:9px; font-weight:500; letter-spacing:0.28em; text-transform:uppercase; color:var(--slate); display:block; margin-bottom:16px; }
     .s3-title { font-family:var(--serif); font-weight:300; font-size:clamp(32px,3.5vw,48px); color:var(--white); line-height:1.1; }
     .s3-title em { font-style:italic; color:rgba(255,255,255,0.28); }
     .s3-link { font-family:var(--sans); font-size:10px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.35); text-decoration:none; transition:color 0.2s; white-space:nowrap; }
     .s3-link:hover { color:var(--white); }
-    .s3-services { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:rgba(255,255,255,0.06); }
-    .s3-card { background:var(--navy); padding:48px 40px; text-decoration:none; display:flex; flex-direction:column; gap:16px; position:relative; overflow:hidden; transition:background 0.3s; }
-    .s3-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:var(--slate); transform:scaleX(0); transform-origin:left; transition:transform 0.4s ease; }
-    .s3-card:hover { background:rgba(255,255,255,0.03); }
-    .s3-card:hover::before { transform:scaleX(1); }
-    .s3-card:hover .s3-card-arrow { opacity:0.8; transform:translateX(8px); }
-    .s3-card:hover .s3-card-title { color:var(--white); }
-    .s3-card-num { font-family:var(--sans); font-size:8px; font-weight:500; letter-spacing:0.24em; text-transform:uppercase; color:var(--slate); }
-    .s3-card-title { font-family:var(--serif); font-weight:400; font-size:26px; color:rgba(255,255,255,0.7); line-height:1.2; transition:color 0.3s; }
-    .s3-card-desc { font-family:var(--sans); font-size:11px; font-weight:300; line-height:1.8; color:rgba(255,255,255,0.32); flex:1; }
-    .s3-card-arrow { font-size:18px; color:var(--slate); opacity:0.4; margin-top:auto; transition:opacity 0.3s, transform 0.3s ease; align-self:flex-start; }
+    .s3-accordion { display:flex; flex-direction:column; }
+    .s3-item { border-top:1px solid rgba(255,255,255,0.08); cursor:pointer; }
+    .s3-item:last-child { border-bottom:1px solid rgba(255,255,255,0.08); }
+    .s3-row { display:flex; align-items:center; justify-content:space-between; padding:28px 0; transition:padding-left 0.3s; }
+    .s3-item:hover .s3-row, .s3-item.active .s3-row { padding-left:8px; }
+    .s3-row-left { display:flex; align-items:baseline; gap:32px; }
+    .s3-num { font-family:var(--sans); font-size:9px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--slate); min-width:140px; }
+    .s3-name { font-family:var(--serif); font-weight:400; font-size:clamp(22px,2.5vw,32px); color:rgba(255,255,255,0.55); line-height:1.1; transition:color 0.3s; }
+    .s3-item:hover .s3-name, .s3-item.active .s3-name { color:var(--white); }
+    .s3-chevron { font-size:24px; color:var(--slate); opacity:0.6; transition:transform 0.4s ease, opacity 0.3s; flex-shrink:0; }
+    .s3-item.active .s3-chevron { transform:rotate(45deg); opacity:1; }
+    .s3-body { max-height:0; overflow:hidden; transition:max-height 0.5s ease; }
+    .s3-item.active .s3-body { max-height:200px; }
+    .s3-desc { font-family:var(--sans); font-size:12px; font-weight:300; line-height:1.9; color:rgba(255,255,255,0.42); max-width:600px; padding:0 0 16px 172px; }
+    .s3-cta { display:inline-block; font-family:var(--sans); font-size:9px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--slate); text-decoration:none; margin-left:172px; margin-bottom:28px; transition:color 0.2s, letter-spacing 0.2s; }
+    .s3-cta:hover { color:var(--white); letter-spacing:0.24em; }
 
     /* ══ SECTION 4 — CTA FINAL ══ */
     .s4 { position:relative; min-height:500px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
@@ -180,9 +197,11 @@
 
       .s3 { padding:72px 24px; }
       .s3-header { flex-direction:column; align-items:flex-start; gap:16px; margin-bottom:40px; }
-      .s3-services { grid-template-columns:1fr; }
-      .s3-card { padding:32px 24px; }
-      .s3-card-title { font-size:22px; }
+      .s3-row-left { flex-direction:column; gap:4px; }
+      .s3-num { min-width:auto; font-size:8px; }
+      .s3-name { font-size:20px; }
+      .s3-desc { padding:0 0 12px; }
+      .s3-cta { margin-left:0; margin-bottom:20px; }
 
       .s4 { min-height:auto; }
       .s4-content { padding:72px 24px; }
@@ -283,35 +302,58 @@
     </div>
   </section>
 
-  <!-- ══ S3 — SERVICES ══ -->
+  <!-- ══ S3 — SERVICES ACCORDION ══ -->
   <section class="s3">
+    <div class="s3-bg"></div>
+    <div class="s3-overlay"></div>
     <div class="s3-inner">
       <div class="s3-header">
         <div>
           <span class="s3-label reveal">What we do</span>
-          <h2 class="s3-title reveal delay-1">Three ways we<br>create <em>measurable value.</em></h2>
+          <h2 class="s3-title reveal delay-1">Three ways we create<br><em>measurable value.</em></h2>
         </div>
         <a href="services/index.html" class="s3-link reveal">View all services →</a>
       </div>
-      <div class="s3-services">
-        <a href="services/index.html#assessment" class="s3-card reveal delay-1">
-          <span class="s3-card-num">I — Assessment</span>
-          <span class="s3-card-title">Transformation Assessment</span>
-          <span class="s3-card-desc">Clarifying where value is created, where risk exists and what successful transformation requires.</span>
-          <span class="s3-card-arrow">→</span>
-        </a>
-        <a href="services/index.html#leadership" class="s3-card reveal delay-2">
-          <span class="s3-card-num">II — Leadership</span>
-          <span class="s3-card-title">Transformation Leadership</span>
-          <span class="s3-card-desc">Converting strategic decisions into disciplined execution and measurable results.</span>
-          <span class="s3-card-arrow">→</span>
-        </a>
-        <a href="services/index.html#technology" class="s3-card reveal delay-3">
-          <span class="s3-card-num">III — Technology</span>
-          <span class="s3-card-title">Technology &amp; AI Advisory</span>
-          <span class="s3-card-desc">Aligning technology and AI investments with defined business outcomes and value creation.</span>
-          <span class="s3-card-arrow">→</span>
-        </a>
+      <div class="s3-accordion">
+        <div class="s3-item active reveal delay-1" data-href="services/index.html#assessment">
+          <div class="s3-row">
+            <div class="s3-row-left">
+              <span class="s3-num">I — Assessment</span>
+              <span class="s3-name">Transformation Assessment</span>
+            </div>
+            <span class="s3-chevron">+</span>
+          </div>
+          <div class="s3-body">
+            <p class="s3-desc">Clarifying where value is created, where risk exists and what successful transformation requires. Many transformations generate activity. Far fewer generate measurable value. The difference starts with an honest assessment.</p>
+            <a href="services/index.html#assessment" class="s3-cta">Discover →</a>
+          </div>
+        </div>
+        <div class="s3-item reveal delay-2" data-href="services/index.html#leadership">
+          <div class="s3-row">
+            <div class="s3-row-left">
+              <span class="s3-num">II — Leadership</span>
+              <span class="s3-name">Transformation Leadership</span>
+            </div>
+            <span class="s3-chevron">+</span>
+          </div>
+          <div class="s3-body">
+            <p class="s3-desc">Converting strategic decisions into disciplined execution and measurable results. A decision alone changes nothing — it must be understood, accepted, executed and sustained.</p>
+            <a href="services/index.html#leadership" class="s3-cta">Discover →</a>
+          </div>
+        </div>
+        <div class="s3-item reveal delay-3" data-href="services/index.html#technology">
+          <div class="s3-row">
+            <div class="s3-row-left">
+              <span class="s3-num">III — Technology & AI</span>
+              <span class="s3-name">Technology &amp; AI Advisory</span>
+            </div>
+            <span class="s3-chevron">+</span>
+          </div>
+          <div class="s3-body">
+            <p class="s3-desc">Aligning technology and AI investments with defined business outcomes and value creation. Technology matters. But it is a tool, not an outcome — its value is measured by the results it creates.</p>
+            <a href="services/index.html#technology" class="s3-cta">Discover →</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -376,6 +418,16 @@
       }, 2000 / 20);
     }
     setTimeout(runCounter, 1200);
+
+    /* ══ ACCORDION ══ */
+    document.querySelectorAll('.s3-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') return;
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.s3-item').forEach(i => i.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
+      });
+    });
 
     /* ══ SCROLL REVEAL ══ */
     const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
