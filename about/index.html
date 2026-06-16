@@ -144,6 +144,12 @@
       .bar-list { flex-wrap:wrap; gap:6px; }
       .bar-tagline { display:block; font-size:11px; }
     }
+    .scroll-indicator { display:none; }
+    @media (max-width:768px) {
+      .scroll-indicator { display:flex; align-items:center; justify-content:center; gap:6px; padding:10px 20px 16px; background:var(--navy); }
+      .scroll-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,0.2); transition:background 0.3s; flex-shrink:0; }
+      .scroll-dot.active { background:var(--slate); }
+    }
     @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
   </style>
 </head>
@@ -192,6 +198,11 @@
       <div class="sidebar-bottom">
         <p class="sidebar-quote">There was a before Evolvance Advisory and an after Evolvance Advisory.</p>
       </div>
+    </div>
+    <div class="scroll-indicator" id="scrollIndicator">
+      <span class="scroll-dot active" data-index="0"></span>
+      <span class="scroll-dot" data-index="1"></span>
+      <span class="scroll-dot" data-index="2"></span>
     </div>
 
     <div class="content">
@@ -255,7 +266,7 @@
             <h2 class="panel-title">The people<br><em>behind the work.</em></h2>
             <div class="panel-body">
               <p>Evolvance Advisory is led by a practitioner — not a theorist. Someone who has made the decisions, led the transformations and lived the accountability.</p>
-              <p>Over 20 years of executive leadership across financial services. From strategy to execution. From the boardroom to the front line.</p>
+              <p>20+ years of executive leadership across financial services — working with Tier-1 financial institutions across Europe and beyond. From strategy to execution. From the boardroom to the front line.</p>
               <p>Board-level experience. Enterprise-scale transformations. A track record built on results, not reports.</p>
             </div>
           </div>
@@ -295,6 +306,14 @@
 
   <script>
     const tabs = document.querySelectorAll('.tab');
+    const dots = document.querySelectorAll('.scroll-dot');
+    const tabOrder = ['philosophy','values','leadership'];
+
+    function updateDots(panelId) {
+      const idx = tabOrder.indexOf(panelId);
+      dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+    }
+
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         const target = tab.dataset.panel;
@@ -317,12 +336,10 @@
           next.style.transform = 'translateY(12px)';
           next.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
 
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              next.style.opacity = '1';
-              next.style.transform = 'translateY(0)';
-            });
-          });
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            next.style.opacity = '1';
+            next.style.transform = 'translateY(0)';
+          }));
 
           setTimeout(() => {
             next.style.transition = '';
@@ -333,6 +350,7 @@
 
         tabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
+        updateDots(target);
       });
     });
   </script>
