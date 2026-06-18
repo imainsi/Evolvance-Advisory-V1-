@@ -25,16 +25,6 @@
     @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
     @keyframes scrollBounce { 0%,100% { transform:translateY(0); opacity:0.4; } 50% { transform:translateY(8px); opacity:1; } }
 
-    /* ══ ACCORDION ══ */
-    document.querySelectorAll('.s3-item').forEach(item => {
-      item.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') return;
-        const isActive = item.classList.contains('active');
-        document.querySelectorAll('.s3-item').forEach(i => i.classList.remove('active'));
-        if (!isActive) item.classList.add('active');
-      });
-    });
-
     /* ══ SCROLL REVEAL ══ */
     .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.8s ease, transform 0.8s ease; }
     .reveal.visible { opacity:1; transform:translateY(0); }
@@ -79,18 +69,58 @@
     .nav-hamburger span { display:block; width:24px; height:2px; background:rgba(255,255,255,0.8); border-radius:1px; transition:all 0.3s; }
 
     /* ══ MOBILE MENU ══ */
-    .mobile-menu { display:none; position:fixed; inset:0; z-index:199; flex-direction:column; justify-content:center; align-items:stretch; padding-top:0; }
+    .mobile-menu {
+      display:none; position:fixed; inset:0; z-index:300;
+      background:var(--navy);
+      flex-direction:column; justify-content:center; align-items:flex-start;
+      padding:0 0 0 64px;
+    }
+    .mobile-menu::before {
+      content:''; position:absolute; left:40px; top:10%; bottom:10%;
+      width:1px;
+      background:linear-gradient(to bottom, transparent 0%, rgba(62,90,128,0.9) 30%, rgba(255,255,255,0.6) 50%, rgba(62,90,128,0.9) 70%, transparent 100%);
+      box-shadow:0 0 12px rgba(255,255,255,0.25);
+    }
     .mobile-menu.open { display:flex; }
-    .mobile-menu a { font-family:var(--serif); font-weight:400; font-size:32px; text-decoration:none; padding:20px 32px; letter-spacing:0.04em; width:100%; text-align:center; transition:opacity 0.2s; }
-    .mobile-menu a:nth-child(odd) { background:var(--white); color:var(--navy); }
-    .mobile-menu a:nth-child(even) { background:var(--navy); color:var(--white); }
-    .mobile-menu a:hover { opacity:0.8; }
-    .mobile-menu-cta { background:var(--slate) !important; color:var(--white) !important; font-family:var(--sans) !important; font-size:11px !important; font-weight:500 !important; letter-spacing:0.18em !important; text-transform:uppercase !important; padding:20px 32px !important; margin-top:0 !important; border:none !important; }
+    .mobile-menu a {
+      font-family:var(--serif); font-weight:300; font-size:38px;
+      color:rgba(255,255,255,0.55); text-decoration:none;
+      padding:14px 0; letter-spacing:0.04em;
+      transition:color 0.2s, transform 0.2s;
+      opacity:0; transform:translateX(20px);
+    }
+    .mobile-menu.open a { opacity:1; transform:translateX(0); }
+    .mobile-menu.open a:nth-child(1) { transition:color 0.2s, opacity 0.4s 0.05s, transform 0.4s 0.05s; }
+    .mobile-menu.open a:nth-child(2) { transition:color 0.2s, opacity 0.4s 0.12s, transform 0.4s 0.12s; }
+    .mobile-menu.open a:nth-child(3) { transition:color 0.2s, opacity 0.4s 0.19s, transform 0.4s 0.19s; }
+    .mobile-menu.open a:nth-child(4) { transition:color 0.2s, opacity 0.4s 0.26s, transform 0.4s 0.26s; }
+    .mobile-menu.open a:nth-child(5) { transition:color 0.2s, opacity 0.4s 0.33s, transform 0.4s 0.33s; }
+    .mobile-menu a:hover { color:var(--white); }
+    .mobile-menu-cta {
+      font-family:var(--sans) !important; font-size:10px !important;
+      font-weight:500 !important; letter-spacing:0.18em !important;
+      text-transform:uppercase !important; color:rgba(255,255,255,0.45) !important;
+      font-size:10px !important; padding:14px 0 !important;
+      margin-top:16px !important; border:none !important;
+      border-top:1px solid rgba(255,255,255,0.08) !important;
+      width:auto !important;
+    }
+    .mobile-menu-close {
+      position:absolute; top:20px; right:20px;
+      background:none; border:none; cursor:pointer;
+      width:44px; height:44px; display:flex; align-items:center; justify-content:center;
+    }
+    .mobile-menu-close::before, .mobile-menu-close::after {
+      content:''; position:absolute; width:20px; height:1px; background:rgba(255,255,255,0.5);
+    }
+    .mobile-menu-close::before { transform:rotate(45deg); }
+    .mobile-menu-close::after { transform:rotate(-45deg); }
 
     /* ══ SECTION 1 — HERO ══ */
     .s1 { position:relative; height:100vh; min-height:600px; display:flex; align-items:center; overflow:hidden; }
-    @keyframes slowRise { from { background-position:center bottom; } to { background-position:center top; } }
-    .s1-bg { position:absolute; inset:0; background-image:url('hero.jpg.png'); background-size:cover; background-position:center bottom; animation:slowRise 8s linear infinite alternate; }
+    @keyframes slowRise { from { transform:translateY(0); } to { transform:translateY(-8%); } }
+    .s1-bg-wrap { position:absolute; inset:-10% 0; }
+    .s1-bg { position:absolute; inset:0; background-image:url('hero.jpg.png'); background-size:cover; background-position:center; animation:slowRise 8s ease-in-out infinite alternate; }
     .s1-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(11,31,58,0.92) 0%,rgba(11,31,58,0.70) 60%,rgba(11,31,58,0.50) 100%); }
     .s1-content { position:relative; z-index:2; padding:0 80px; max-width:900px; }
     .s1-eyebrow { font-family:var(--sans); font-size:10px; font-weight:500; letter-spacing:0.30em; text-transform:uppercase; color:var(--slate); display:block; margin-bottom:24px; animation:fadeIn 0.8s ease 0.3s both; }
@@ -106,7 +136,7 @@
     .s1-scroll-label { font-family:var(--sans); font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.3); }
 
     /* ══ SECTION 2 — CROYANCE ══ */
-    .s2 { background:var(--white); padding:120px 80px; }
+    .s2 { background:var(--white); padding:80px 80px; }
     .s2-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
     .s2-left { }
     .s2-label { font-family:var(--sans); font-size:9px; font-weight:500; letter-spacing:0.28em; text-transform:uppercase; color:var(--slate); display:block; margin-bottom:28px; }
@@ -123,9 +153,10 @@
     .s2-diff-desc { font-family:var(--sans); font-size:11px; font-weight:300; line-height:1.75; color:var(--charcoal); opacity:0.55; }
 
     /* ══ SECTION 3 — SERVICES ACCORDION ══ */
-    @keyframes slowRiseSvc { 0% { background-position:center bottom; } 100% { background-position:center top; } }
-    .s3 { position:relative; padding:120px 80px; overflow:hidden; }
-    .s3-bg { position:absolute; inset:0; background-image:url('services-bg.jpg.png'); background-size:cover; background-position:center bottom; animation:slowRiseSvc 10s linear infinite alternate; }
+    @keyframes slowRiseSvc { from { transform:translateY(0); } to { transform:translateY(-8%); } }
+    .s3 { position:relative; padding:80px 80px; overflow:hidden; }
+    .s3-bg-wrap { position:absolute; inset:-10% 0; }
+    .s3-bg { position:absolute; inset:0; background-image:url('services-bg.jpg.png'); background-size:cover; background-position:center; animation:slowRiseSvc 10s ease-in-out infinite alternate; }
     .s3-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(11,31,58,0.93) 0%,rgba(11,31,58,0.82) 100%); }
     .s3-inner { position:relative; z-index:2; max-width:1200px; margin:0 auto; }
     .s3-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:64px; }
@@ -153,10 +184,11 @@
 
     /* ══ SECTION 4 — CTA FINAL ══ */
     .s4 { position:relative; min-height:500px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-    @keyframes slowRiseCta { from { background-position:center bottom; } to { background-position:center top; } }
-    .s4-bg { position:absolute; inset:0; background-image:url('cta-bg.jpg.png'); background-size:cover; background-position:center bottom; filter:brightness(0.45) saturate(0.7); animation:slowRiseCta 9s linear infinite alternate; }
-    .s4-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(11,31,58,0.88) 0%,rgba(11,31,58,0.65) 100%); }
-    .s4-content { position:relative; z-index:2; text-align:center; padding:100px 80px; max-width:800px; }
+    @keyframes slowRiseCta { from { transform:translateY(0); } to { transform:translateY(-8%); } }
+    .s4-bg-wrap { position:absolute; inset:-10% 0; overflow:hidden; }
+    .s4-bg { position:absolute; inset:0; background-image:url('cta-bg.jpg.png'); background-size:cover; background-position:center; filter:brightness(0.65) saturate(0.7); animation:slowRiseCta 9s ease-in-out infinite alternate; }
+    .s4-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(11,31,58,0.75) 0%,rgba(11,31,58,0.55) 100%); }
+    .s4-content { position:relative; z-index:2; text-align:center; padding:80px 80px; max-width:800px; }
     .s4-label { font-family:var(--sans); font-size:9px; font-weight:500; letter-spacing:0.28em; text-transform:uppercase; color:var(--slate); display:block; margin-bottom:28px; }
     .s4-title { font-family:var(--serif); font-weight:300; font-size:clamp(40px,5vw,72px); line-height:1.05; color:var(--white); margin-bottom:8px; }
     .s4-title em { font-style:italic; color:rgba(255,255,255,0.3); }
@@ -198,7 +230,7 @@
       .s1-btn { padding:14px 28px; font-size:10px; align-self:flex-start; }
       .s1-scroll { display:none; }
 
-      .s2 { padding:72px 24px; }
+      .s2 { padding:52px 24px; }
       .s2-inner { grid-template-columns:1fr; gap:48px; }
       .s2-statement { font-size:clamp(28px,8vw,40px); }
       .s2-statement-sub { font-size:clamp(22px,6vw,32px); }
@@ -214,7 +246,7 @@
       .s3-cta { margin-left:0; margin-bottom:20px; }
 
       .s4 { min-height:auto; }
-      .s4-content { padding:72px 24px; }
+      .s4-content { padding:52px 24px; }
       .s4-title { font-size:clamp(32px,9vw,48px); }
       .s4-sub { font-size:11px; margin-bottom:36px; }
       .s4-btn { padding:14px 28px; font-size:10px; }
@@ -249,23 +281,24 @@
       </div>
       <div class="nav-vsep"></div>
       <a href="mailto:contact@evolvance-advisory.com?subject=Schedule a Conversation" class="nav-cta">Schedule a Conversation</a>
-      <button class="nav-hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <div class="mobile-menu">
-    <a href="services/index.html" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Services</a>
-    <a href="industries/index.html" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Industries</a>
-    <a href="about/index.html" onclick="document.querySelector('.mobile-menu').classList.remove('open')">About</a>
-    <a href="contact/index.html" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Contact</a>
-    <a href="mailto:contact@evolvance-advisory.com?subject=Schedule a Conversation" class="mobile-menu-cta" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Schedule a Conversation</a>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.remove('open')" aria-label="Close menu"></button>
+    <a href="services/index.html" onclick="document.getElementById('mobileMenu').classList.remove('open')">Services</a>
+    <a href="industries/index.html" onclick="document.getElementById('mobileMenu').classList.remove('open')">Industries</a>
+    <a href="about/index.html" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
+    <a href="contact/index.html" onclick="document.getElementById('mobileMenu').classList.remove('open')">Contact</a>
+    <a href="mailto:contact@evolvance-advisory.com?subject=Schedule a Conversation" class="mobile-menu-cta" onclick="document.getElementById('mobileMenu').classList.remove('open')">Schedule a Conversation</a>
   </div>
 
   <!-- ══ S1 — HERO ══ -->
   <section class="s1">
-    <div class="s1-bg" id="heroBg"></div>
+    <div class="s1-bg-wrap"><div class="s1-bg" id="heroBg"></div></div>
     <div class="s1-overlay"></div>
     <div class="s1-content">
       <span class="s1-eyebrow">Transformation Advisory · Financial Services</span>
@@ -316,7 +349,7 @@
 
   <!-- ══ S3 — SERVICES ACCORDION ══ -->
   <section class="s3">
-    <div class="s3-bg"></div>
+    <div class="s3-bg-wrap"><div class="s3-bg"></div></div>
     <div class="s3-overlay"></div>
     <div class="s3-inner">
       <div class="s3-header">
@@ -372,7 +405,7 @@
 
   <!-- ══ S4 — CTA FINAL ══ -->
   <section class="s4">
-    <div class="s4-bg"></div>
+    <div class="s4-bg-wrap"><div class="s4-bg"></div></div>
     <div class="s4-overlay"></div>
     <div class="s4-content">
       <span class="s4-label reveal">Contact</span>
@@ -413,31 +446,16 @@
     /* ══ HERO BG ══ */
     const heroBg = document.getElementById('heroBg');
 
-    /* ══ COUNTER 0 → 20 (loop) ══ */
+    /* ══ COUNTER 0 → 20 (once) ══ */
     const counterEl = document.getElementById('expCounter');
     const counterMobile = document.getElementById('expCounterMobile');
-    function runCounter() {
-      let count = 0;
-      counterEl.textContent = '0+';
-      if (counterMobile) counterMobile.textContent = '0+';
-      const iv = setInterval(() => {
-        count++;
-        counterEl.textContent = count + '+';
-        if (counterMobile) counterMobile.textContent = count + '+';
-        if (count >= 20) { clearInterval(iv); setTimeout(runCounter, 10000); }
-      }, 2000 / 20);
-    }
-    setTimeout(runCounter, 1200);
-
-    /* ══ ACCORDION ══ */
-    document.querySelectorAll('.s3-item').forEach(item => {
-      item.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') return;
-        const isActive = item.classList.contains('active');
-        document.querySelectorAll('.s3-item').forEach(i => i.classList.remove('active'));
-        if (!isActive) item.classList.add('active');
-      });
-    });
+    let count = 0;
+    const iv = setInterval(() => {
+      count++;
+      counterEl.textContent = count + '+';
+      if (counterMobile) counterMobile.textContent = count + '+';
+      if (count >= 20) clearInterval(iv);
+    }, 2000 / 20);
 
     /* ══ SCROLL REVEAL ══ */
     const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');

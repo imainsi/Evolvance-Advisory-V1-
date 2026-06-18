@@ -44,13 +44,50 @@
     .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; background:none; border:none; }
     .nav-hamburger span { display:block; width:24px; height:2px; background:rgba(255,255,255,0.8); border-radius:1px; }
 
-    .mobile-menu { display:none; position:fixed; inset:0; z-index:199; flex-direction:column; justify-content:center; align-items:stretch; padding-top:0; }
+    .mobile-menu {
+      display:none; position:fixed; inset:0; z-index:300;
+      background:var(--navy);
+      flex-direction:column; justify-content:center; align-items:flex-start;
+      padding:0 0 0 64px;
+    }
+    .mobile-menu::before {
+      content:''; position:absolute; left:40px; top:10%; bottom:10%;
+      width:1px;
+      background:linear-gradient(to bottom, transparent 0%, rgba(62,90,128,0.9) 30%, rgba(255,255,255,0.6) 50%, rgba(62,90,128,0.9) 70%, transparent 100%);
+      box-shadow:0 0 12px rgba(255,255,255,0.25);
+    }
     .mobile-menu.open { display:flex; }
-    .mobile-menu a { font-family:var(--serif); font-weight:400; font-size:32px; text-decoration:none; padding:20px 32px; letter-spacing:0.04em; width:100%; text-align:center; transition:opacity 0.2s; }
-    .mobile-menu a:nth-child(odd) { background:var(--white); color:var(--navy); }
-    .mobile-menu a:nth-child(even) { background:var(--navy); color:var(--white); }
-    .mobile-menu a:hover { opacity:0.8; }
-    .mobile-menu-cta { background:var(--slate) !important; color:var(--white) !important; font-family:var(--sans) !important; font-size:11px !important; font-weight:500 !important; letter-spacing:0.18em !important; text-transform:uppercase !important; padding:20px 32px !important; margin-top:0 !important; border:none !important; }
+    .mobile-menu a {
+      font-family:var(--serif); font-weight:300; font-size:38px;
+      color:rgba(255,255,255,0.55); text-decoration:none;
+      padding:14px 0; letter-spacing:0.04em;
+      transition:color 0.2s, transform 0.2s;
+      opacity:0; transform:translateX(20px);
+    }
+    .mobile-menu.open a { opacity:1; transform:translateX(0); }
+    .mobile-menu.open a:nth-child(2) { transition:color 0.2s, opacity 0.4s 0.05s, transform 0.4s 0.05s; }
+    .mobile-menu.open a:nth-child(3) { transition:color 0.2s, opacity 0.4s 0.12s, transform 0.4s 0.12s; }
+    .mobile-menu.open a:nth-child(4) { transition:color 0.2s, opacity 0.4s 0.19s, transform 0.4s 0.19s; }
+    .mobile-menu.open a:nth-child(5) { transition:color 0.2s, opacity 0.4s 0.26s, transform 0.4s 0.26s; }
+    .mobile-menu.open a:nth-child(6) { transition:color 0.2s, opacity 0.4s 0.33s, transform 0.4s 0.33s; }
+    .mobile-menu a:hover { color:var(--white); }
+    .mobile-menu-cta {
+      font-family:var(--sans) !important; font-size:10px !important;
+      font-weight:500 !important; letter-spacing:0.18em !important;
+      text-transform:uppercase !important; color:rgba(255,255,255,0.45) !important;
+      padding:14px 0 !important; margin-top:16px !important; border:none !important;
+      border-top:1px solid rgba(255,255,255,0.08) !important; width:auto !important;
+    }
+    .mobile-menu-close {
+      position:absolute; top:20px; right:20px;
+      background:none; border:none; cursor:pointer;
+      width:44px; height:44px; display:flex; align-items:center; justify-content:center;
+    }
+    .mobile-menu-close::before, .mobile-menu-close::after {
+      content:''; position:absolute; width:20px; height:1px; background:rgba(255,255,255,0.5);
+    }
+    .mobile-menu-close::before { transform:rotate(45deg); }
+    .mobile-menu-close::after { transform:rotate(-45deg); }
 
     /* PAGE — rideau d'ouverture */
     .page { position:fixed; top:var(--nav-h); left:0; right:0; bottom:var(--bar-h); display:grid; grid-template-columns:1fr 1fr; }
@@ -145,12 +182,13 @@
       </div>
       <div class="nav-vsep"></div>
       <a href="mailto:contact@evolvance-advisory.com?subject=Schedule a Conversation" class="nav-cta">Schedule a Conversation</a>
-      <button class="nav-hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
-  <div class="mobile-menu">
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.remove('open')" aria-label="Close menu"></button>
     <a href="../services/index.html">Services</a>
     <a href="../industries/index.html">Industries</a>
     <a href="../about/index.html">About</a>
