@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Evolvance Advisory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:#0B1F3A; --slate:#3E5A80; --charcoal:#111827;
+      --gray:#E6E8EC; --offwhite:#FAFAFB; --white:#FFFFFF;
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'Montserrat',system-ui,sans-serif;
+      --nav-h:76px; --bar-h:42px;
+    }
+    html, body { height:100%; overflow:hidden; font-family:var(--sans); -webkit-font-smoothing:antialiased; }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes slideInLeft { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+
+    nav { position:fixed; top:0; left:0; right:0; z-index:200; height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; padding:0 64px; background:var(--navy); border-bottom:1px solid rgba(255,255,255,0.07); animation:fadeIn 0.5s ease both; }
+    .nav-logo { display:flex; flex-direction:column; line-height:1; text-decoration:none; }
+    .nav-logo-primary { font-family:var(--serif); font-weight:600; font-size:26px; letter-spacing:0.18em; color:var(--white); text-transform:uppercase; }
+    .nav-logo-secondary { font-family:var(--sans); font-weight:300; font-size:9px; letter-spacing:0.36em; color:rgba(255,255,255,0.28); text-transform:uppercase; margin-top:6px; }
+    .nav-links { display:flex; align-items:center; gap:48px; list-style:none; }
+    .nav-links a { font-family:var(--sans); font-size:11px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.48); text-decoration:none; transition:color 0.25s; position:relative; }
+    .nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--white); opacity:0; transform:scaleX(0); transform-origin:left; transition:transform 0.25s ease, opacity 0.25s; }
+    .nav-links a:hover, .nav-links a.active { color:var(--white); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform:scaleX(1); opacity:0.35; }
+    .nav-right { display:flex; align-items:center; gap:24px; }
+    .nav-exp { display:flex; align-items:baseline; gap:7px; }
+    .nav-exp-num { font-family:var(--serif); font-weight:600; font-size:20px; color:rgba(255,255,255,0.45); }
+    .nav-exp-text { font-family:var(--sans); font-size:8px; font-weight:300; letter-spacing:0.11em; text-transform:uppercase; color:rgba(255,255,255,0.20); line-height:1.5; }
+    .nav-vsep { width:1px; height:24px; background:rgba(255,255,255,0.12); }
+    .nav-cta { font-family:var(--sans); font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--white); text-decoration:none; border:1px solid rgba(255,255,255,0.30); padding:11px 24px; white-space:nowrap; position:relative; overflow:hidden; transition:border-color 0.3s; }
+    .nav-cta::before { content:''; position:absolute; inset:0; background:rgba(255,255,255,0.08); transform:translateX(-100%); transition:transform 0.3s ease; }
+    .nav-cta:hover { border-color:rgba(255,255,255,0.6); }
+    .nav-cta:hover::before { transform:translateX(0); }
+    .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; background:none; border:none; }
+    .nav-hamburger span { display:block; width:24px; height:2px; background:rgba(255,255,255,0.8); border-radius:1px; }
+
+    .mobile-menu {
+      display:none; position:fixed; inset:0; z-index:300;
+      background:var(--navy);
+      flex-direction:column; justify-content:center; align-items:center;
+      padding-bottom:40px;
+    }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a {
+      font-family:var(--serif); font-weight:300; font-size:36px;
+      color:rgba(255,255,255,0.6); text-decoration:none;
+      padding:12px 0; letter-spacing:0.04em; text-align:center;
+      transition:color 0.25s;
+      opacity:0; transform:translateY(10px);
+    }
+    .mobile-menu.open a { opacity:1; transform:translateY(0); }
+    .mobile-menu.open a:nth-child(2) { transition:color 0.25s, opacity 0.4s 0.06s, transform 0.4s 0.06s; }
+    .mobile-menu.open a:nth-child(3) { transition:color 0.25s, opacity 0.4s 0.13s, transform 0.4s 0.13s; }
+    .mobile-menu.open a:nth-child(4) { transition:color 0.25s, opacity 0.4s 0.20s, transform 0.4s 0.20s; }
+    .mobile-menu.open a:nth-child(5) { transition:color 0.25s, opacity 0.4s 0.27s, transform 0.4s 0.27s; }
+    .mobile-menu.open a:nth-child(6) { transition:color 0.25s, opacity 0.4s 0.34s, transform 0.4s 0.34s; }
+    .mobile-menu a:hover { color:var(--white); }
+    .mobile-menu-cta {
+      font-family:var(--sans) !important; font-size:10px !important;
+      font-weight:500 !important; letter-spacing:0.18em !important;
+      text-transform:uppercase !important;
+      color:rgba(255,255,255,0.38) !important;
+      padding:14px 28px !important; margin-top:24px !important;
+      border:1px solid rgba(255,255,255,0.18) !important;
+    }
+    .mobile-menu-close {
+      position:absolute; top:16px; right:16px;
+      background:none; border:none; cursor:pointer;
+      width:44px; height:44px; display:flex; align-items:center; justify-content:center;
+    }
+    .mobile-menu-close::before, .mobile-menu-close::after {
+      content:''; position:absolute; width:18px; height:1px; background:rgba(255,255,255,0.4);
+    }
+    .mobile-menu-close::before { transform:rotate(45deg); }
+    .mobile-menu-close::after { transform:rotate(-45deg); }
+
+    .page { position:fixed; top:var(--nav-h); left:0; right:0; bottom:var(--bar-h); display:grid; grid-template-columns:280px 1fr; }
+
+    .sidebar { background:var(--navy); display:flex; flex-direction:column; justify-content:space-between; padding:52px 0 40px; border-right:1px solid rgba(255,255,255,0.07); animation:slideInLeft 0.6s ease 0.1s both; }
+    .sidebar-eyebrow { font-family:var(--sans); font-size:9px; font-weight:500; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.28); padding:0 40px; margin-bottom:40px; display:block; animation:fadeIn 0.5s ease 0.3s both; }
+    .tab-list { display:flex; flex-direction:column; }
+    .tab { display:flex; flex-direction:column; padding:20px 40px; cursor:pointer; border-left:2px solid transparent; transition:background 0.2s, border-color 0.2s; gap:4px; }
+    .tab:hover { background:rgba(255,255,255,0.03); }
+    .tab.active { border-left-color:var(--slate); background:rgba(255,255,255,0.04); }
+    .tab-name { font-family:var(--serif); font-weight:500; font-size:18px; color:rgba(255,255,255,0.5); transition:color 0.2s; line-height:1.2; }
+    .tab.active .tab-name { color:var(--white); }
+    .tab:hover .tab-name { color:rgba(255,255,255,0.8); }
+    .sidebar-bottom { padding:0 40px; border-top:1px solid rgba(255,255,255,0.06); padding-top:24px; }
+    .sidebar-quote { font-family:var(--serif); font-style:italic; font-size:13px; line-height:1.6; color:rgba(255,255,255,0.18); }
+
+    .content { position:relative; overflow:hidden; }
+    .panel { position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr; opacity:0; pointer-events:none; }
+    .panel.active { opacity:1; pointer-events:all; }
+    .panel.active.entry .panel-left { animation:fadeUp 0.55s ease 0.2s both; }
+    .panel.active.entry .panel-right { animation:fadeUp 0.55s ease 0.35s both; }
+
+    .panel-left { display:flex; flex-direction:column; justify-content:space-between; padding:52px 52px 44px 64px; background:var(--offwhite); border-right:1px solid var(--gray); }
+    .panel-label { font-family:var(--sans); font-size:9px; font-weight:500; letter-spacing:0.26em; text-transform:uppercase; color:var(--slate); display:block; margin-bottom:16px; }
+    .panel-title { font-family:var(--serif); font-weight:600; font-size:clamp(32px,3.5vw,48px); line-height:1.08; color:var(--navy); margin-bottom:20px; }
+    .panel-title em { font-style:italic; color:var(--slate); }
+    .panel-body { font-family:var(--sans); font-size:13px; font-weight:300; line-height:1.85; color:var(--charcoal); opacity:0.7; max-width:380px; }
+    .panel-body p { margin-bottom:14px; }
+    .panel-body p:last-child { margin-bottom:0; }
+
+    .panel-right { display:flex; flex-direction:column; justify-content:center; padding:52px 64px 44px 52px; background:var(--white); }
+    .values-label { font-family:var(--sans); font-size:9px; font-weight:500; letter-spacing:0.26em; text-transform:uppercase; color:var(--slate); display:block; margin-bottom:28px; }
+    .values-list { display:flex; flex-direction:column; }
+    .value-item { display:flex; align-items:baseline; gap:20px; padding:14px 0; border-bottom:1px solid var(--gray); transition:padding-left 0.2s; }
+    .value-item:first-child { border-top:1px solid var(--gray); }
+    .value-item:hover { padding-left:4px; }
+    .value-name { font-family:var(--serif); font-weight:600; font-size:18px; color:var(--navy); min-width:120px; transition:color 0.2s; }
+    .value-item:hover .value-name { color:var(--slate); }
+    .value-desc { font-family:var(--sans); font-size:11px; font-weight:300; color:var(--charcoal); opacity:0.5; line-height:1.6; }
+
+    /* Leadership panel */
+    .leader-block { display:flex; flex-direction:column; justify-content:center; height:100%; gap:28px; }
+    .leader-expertise { display:flex; flex-direction:column; gap:0; }
+    .expertise-label { font-family:var(--sans); font-size:9px; font-weight:500; letter-spacing:0.26em; text-transform:uppercase; color:var(--slate); display:block; margin-bottom:20px; }
+    .expertise-item { display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid var(--gray); }
+    .expertise-item:first-of-type { border-top:1px solid var(--gray); }
+    .expertise-dot { width:4px; height:4px; background:var(--slate); border-radius:50%; opacity:0.4; flex-shrink:0; }
+    .expertise-name { font-family:var(--serif); font-size:18px; color:var(--navy); }
+
+    .quote-block { background:var(--navy); padding:16px 22px; }
+    .quote-text { font-family:var(--serif); font-style:italic; font-size:15px; color:rgba(255,255,255,0.85); line-height:1.45; }
+
+    .bottom-bar { position:fixed; bottom:0; left:0; right:0; height:var(--bar-h); background:#060f1d; display:flex; align-items:center; justify-content:space-between; padding:0 64px; animation:fadeIn 0.5s ease 0.5s both; }
+    .bar-left { display:flex; align-items:center; gap:16px; }
+    .bar-label { font-family:var(--sans); font-size:8px; font-weight:500; letter-spacing:0.24em; text-transform:uppercase; color:rgba(255,255,255,0.22); white-space:nowrap; }
+    .bar-sep { width:18px; height:1px; background:var(--slate); opacity:0.35; }
+    .bar-list { display:flex; align-items:center; gap:12px; }
+    .bar-item { font-family:var(--sans); font-size:8px; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.34); }
+    .bar-dot { width:2px; height:2px; background:rgba(255,255,255,0.15); border-radius:50%; }
+    .bar-tagline { font-family:var(--serif); font-style:italic; font-size:12px; color:rgba(255,255,255,0.13); }
+
+    @media (max-width: 768px) {
+      :root { --nav-h:60px; }
+      nav { padding:0 20px; }
+      .nav-logo-primary { font-size:20px; }
+      .nav-logo-secondary { font-size:7px; }
+      .nav-links, .nav-exp, .nav-vsep, .nav-cta { display:none; }
+      .nav-hamburger { display:flex; }
+      html, body { overflow:auto; height:auto; }
+      .page { position:relative; top:auto; left:auto; right:auto; bottom:auto; display:block; margin-top:60px; }
+      .sidebar { position:relative; width:100%; height:auto; padding:16px 0 0; border-right:none; border-bottom:1px solid rgba(255,255,255,0.07); animation:none; }
+      .sidebar-eyebrow { padding:0 20px; margin-bottom:12px; animation:none; }
+      .tab-list { flex-direction:row; overflow-x:auto; padding:0 16px 10px; -webkit-overflow-scrolling:touch; }
+      .tab { padding:8px 14px; border-left:none; border-bottom:2px solid transparent; white-space:nowrap; }
+      .tab.active { border-left:none; border-bottom-color:var(--slate); background:rgba(255,255,255,0.04); }
+      .tab-name { font-size:12px; }
+      .sidebar-bottom { display:none; }
+      .content { position:relative; height:auto; }
+      .panel { position:relative; display:none; grid-template-columns:1fr; opacity:1; pointer-events:all; }
+      .panel.active { display:flex; flex-direction:column; }
+      .panel.active.entry .panel-left, .panel.active.entry .panel-right { animation:none; }
+      .panel-left { padding:20px; border-right:none; border-bottom:1px solid var(--gray); justify-content:flex-start; gap:10px; }
+      .panel-label { font-size:8px; margin-bottom:0; }
+      .panel-title { font-size:26px; line-height:1.1; margin-bottom:0; }
+      .panel-body p { font-size:12px; line-height:1.7; margin-bottom:10px; }
+      .panel-right { padding:16px 20px 20px; }
+      .values-label, .expertise-label { font-size:8px; margin-bottom:16px; }
+      .value-item { padding:10px 0; flex-wrap:wrap; }
+      .value-name { font-size:16px; min-width:auto; }
+      .value-desc { font-size:11px; }
+      .expertise-item { padding:10px 0; }
+      .expertise-name { font-size:15px; }
+      .bottom-bar { position:relative; height:auto; padding:12px 20px; flex-direction:column; align-items:flex-start; gap:4px; animation:none; }
+      .bar-list { flex-wrap:wrap; gap:6px; }
+      .bar-tagline { display:block; font-size:11px; }
+    }
+    .scroll-indicator { display:none; }
+    @media (max-width:768px) {
+      .scroll-indicator { display:flex; align-items:center; justify-content:center; gap:6px; padding:10px 20px 16px; background:var(--navy); }
+      .scroll-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,0.2); transition:background 0.3s; flex-shrink:0; }
+      .scroll-dot.active { background:var(--slate); }
+    }
+    @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-primary">Evolvance</span>
+      <span class="nav-logo-secondary">Advisory</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../industries/index.html">Industries</a></li>
+      <li><a href="../about/index.html" class="active">About</a></li>
+      <li><a href="../contact/index.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-exp">
+        <span class="nav-exp-num">20+</span>
+        <span class="nav-exp-text">Years of experience<br>in financial services</span>
+      </div>
+      <div class="nav-vsep"></div>
+      <a href="../contact/index.html" class="nav-cta">Schedule a Conversation</a>
+      <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.remove('open')" aria-label="Close menu"></button>
+    <a href="../services/index.html">Services</a>
+    <a href="../industries/index.html">Industries</a>
+    <a href="../about/index.html" class="active">About</a>
+    <a href="../contact/index.html">Contact</a>
+    <a href="../contact/index.html" class="mobile-menu-cta">Schedule a Conversation</a>
+  </div>
+
+  <div class="page">
+    <div class="sidebar">
+      <div class="sidebar-top">
+        <span class="sidebar-eyebrow">About</span>
+        <div class="tab-list">
+          <div class="tab active" data-panel="philosophy"><span class="tab-name">Our Philosophy</span></div>
+          <div class="tab" data-panel="values"><span class="tab-name">Our Values</span></div>
+          <div class="tab" data-panel="leadership"><span class="tab-name">Leadership</span></div>
+        </div>
+      </div>
+      <div class="sidebar-bottom">
+        <p class="sidebar-quote">There was a before Evolvance Advisory and an after Evolvance Advisory.</p>
+      </div>
+    </div>
+    <div class="scroll-indicator" id="scrollIndicator">
+      <span class="scroll-dot active" data-index="0"></span>
+      <span class="scroll-dot" data-index="1"></span>
+      <span class="scroll-dot" data-index="2"></span>
+    </div>
+
+    <div class="content">
+
+      <!-- PHILOSOPHY -->
+      <div class="panel active entry" id="panel-philosophy">
+        <div class="panel-left">
+          <div>
+            <span class="panel-label">Who we are</span>
+            <h2 class="panel-title">Built on<br><em>real experience.</em></h2>
+            <div class="panel-body">
+              <p>Evolvance Advisory is an independent executive advisory firm. We help organizations in financial services navigate transformation and turn ambition into measurable value.</p>
+              <p>We are not a consulting firm. We are not a vendor. We are a trusted partner — with over 20 years of hands-on leadership experience in real transformations, with real accountability.</p>
+              <p>We do not sell theory. We do not sell activity. We help organizations make decisions that become results.</p>
+            </div>
+          </div>
+          <div class="quote-block">
+            <p class="quote-text">"There was a 'Before' and an 'After' Evolvance Advisory."</p>
+          </div>
+        </div>
+        <div class="panel-right">
+          <span class="values-label">What makes us different</span>
+          <div class="values-list">
+            <div class="value-item"><span class="value-name">Honest</span><span class="value-desc">Reality does not change when it is ignored. Difficult truths are always less expensive than failed transformations.</span></div>
+            <div class="value-item"><span class="value-name">Pragmatic</span><span class="value-desc">We focus on what works, not what looks good. Activity is not progress. Results are.</span></div>
+            <div class="value-item"><span class="value-name">Accountable</span><span class="value-desc">Our success is measured by the value that remains after we leave — not the projects we launch.</span></div>
+            <div class="value-item"><span class="value-name">Human</span><span class="value-desc">Transformation is executed by people. We place people at the center of every engagement.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VALUES -->
+      <div class="panel" id="panel-values">
+        <div class="panel-left">
+          <div>
+            <span class="panel-label">What we stand for</span>
+            <h2 class="panel-title">Five values.<br><em>One direction.</em></h2>
+            <div class="panel-body">
+              <p>These are not words on a wall. They are the principles that guide every conversation, every recommendation and every engagement.</p>
+              <p>We believe transformation is not the objective. Value creation is. And that belief shapes everything we do.</p>
+            </div>
+          </div>
+        </div>
+        <div class="panel-right">
+          <span class="values-label">Our values</span>
+          <div class="values-list">
+            <div class="value-item"><span class="value-name">Trusted</span><span class="value-desc">We act with honesty, accountability and professionalism in everything we do.</span></div>
+            <div class="value-item"><span class="value-name">Strategic</span><span class="value-desc">We connect vision, decisions and execution to achieve meaningful outcomes.</span></div>
+            <div class="value-item"><span class="value-name">Human</span><span class="value-desc">We place people at the center of every transformation journey.</span></div>
+            <div class="value-item"><span class="value-name">Transformative</span><span class="value-desc">We help organizations turn change into tangible and lasting results.</span></div>
+            <div class="value-item"><span class="value-name">Innovative</span><span class="value-desc">We embrace new ideas and approaches that create meaningful impact.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEADERSHIP -->
+      <div class="panel" id="panel-leadership">
+        <div class="panel-left">
+          <div>
+            <span class="panel-label">Leadership</span>
+            <h2 class="panel-title">The people<br><em>behind the work.</em></h2>
+            <div class="panel-body">
+              <p>Evolvance Advisory is led by a practitioner — not a theorist. Someone who has made the decisions, led the transformations and lived the accountability.</p>
+              <p>20+ years of executive leadership across financial services — working with Tier-1 financial institutions across Europe and beyond. From strategy to execution. From the boardroom to the front line.</p>
+              <p>Board-level experience. Enterprise-scale transformations. A track record built on results, not reports.</p>
+            </div>
+          </div>
+        </div>
+        <div class="panel-right">
+          <div class="leader-block">
+            <div class="leader-expertise">
+              <span class="expertise-label">Areas of expertise</span>
+              <div class="expertise-item"><span class="expertise-dot"></span><span class="expertise-name">Digital Transformation</span></div>
+              <div class="expertise-item"><span class="expertise-dot"></span><span class="expertise-name">AI Strategy &amp; Adoption</span></div>
+              <div class="expertise-item"><span class="expertise-dot"></span><span class="expertise-name">Capital Markets &amp; Banking</span></div>
+              <div class="expertise-item"><span class="expertise-dot"></span><span class="expertise-name">Regulatory Governance</span></div>
+              <div class="expertise-item"><span class="expertise-dot"></span><span class="expertise-name">Executive Stakeholder Management</span></div>
+              <div class="expertise-item"><span class="expertise-dot"></span><span class="expertise-name">Board &amp; Corporate Governance</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="bar-left">
+      <span class="bar-label">Who we help</span>
+      <div class="bar-sep"></div>
+      <div class="bar-list">
+        <span class="bar-item">Banking</span><span class="bar-dot"></span>
+        <span class="bar-item">Insurance</span><span class="bar-dot"></span>
+        <span class="bar-item">Capital Markets</span><span class="bar-dot"></span>
+        <span class="bar-item">Wealth &amp; Investment</span><span class="bar-dot"></span>
+        <span class="bar-item">FinTech</span>
+      </div>
+    </div>
+    <span class="bar-tagline">Turning ambition into measurable value.</span>
+  </div>
+
+  <!-- ===== EVOLVANCE AI CHATBOX ===== -->
+  <style>
+    @keyframes ev-pulse { 0%{box-shadow:0 0 0 0 rgba(201,168,76,0.6)} 70%{box-shadow:0 0 0 14px rgba(201,168,76,0)} 100%{box-shadow:0 0 0 0 rgba(201,168,76,0)} }
+    @keyframes ev-wiggle { 0%,100%{transform:rotate(0)scale(1)} 15%{transform:rotate(-8deg)scale(1.08)} 30%{transform:rotate(8deg)scale(1.08)} 45%{transform:rotate(-5deg)scale(1.05)} 60%{transform:rotate(5deg)scale(1.05)} }
+    @keyframes ev-tdot { 0%,60%,100%{transform:translateY(0);opacity:0.4} 30%{transform:translateY(-5px);opacity:1} }
+
+    #ev-toggle {
+      position:fixed; bottom:24px; right:24px; width:54px; height:54px;
+      background:#0B1F3A; border-radius:50%; border:none; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 20px rgba(11,31,58,0.5); z-index:9999;
+      animation:ev-pulse 2.2s infinite; padding:0; transition:transform 0.2s;
+    }
+    #ev-lbl {
+      position:fixed; bottom:86px; right:18px;
+      background:#0B1F3A; color:#fff;
+      font-family:'Montserrat',sans-serif; font-size:9px; font-weight:500; letter-spacing:1.2px; text-transform:uppercase;
+      padding:5px 11px; border-radius:20px; white-space:nowrap;
+      box-shadow:0 2px 12px rgba(11,31,58,0.3); z-index:9998;
+      animation:ev-pulse 2.2s infinite 0.6s; cursor:pointer;
+    }
+    #ev-lbl::after { content:''; position:absolute; bottom:-5px; right:16px; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:5px solid #0B1F3A; }
+
+    /* Desktop: panel en bas à droite */
+    #ev-win {
+      position:fixed; bottom:90px; right:24px; width:345px;
+      background:#fff; border-radius:16px;
+      box-shadow:0 12px 48px rgba(11,31,58,0.16), 0 2px 8px rgba(0,0,0,0.06);
+      display:flex; flex-direction:column; overflow:hidden;
+      z-index:9998; opacity:0; pointer-events:none;
+      transform:translateY(14px) scale(0.97);
+      transition:opacity 0.26s ease, transform 0.26s ease;
+      font-family:'Montserrat',system-ui,sans-serif;
+    }
+    #ev-win.ev-open { opacity:1; pointer-events:all; transform:translateY(0) scale(1); }
+
+    /* Mobile: drawer depuis le bas */
+    @media(max-width:768px) {
+      #ev-win { bottom:0; right:0; left:0; width:100%; max-height:88vh; border-radius:18px 18px 0 0; transform:translateY(30px); }
+      #ev-win.ev-open { transform:translateY(0); }
+      #ev-toggle { bottom:16px; right:16px; width:50px; height:50px; }
+      #ev-lbl { bottom:74px; right:10px; font-size:8px; }
+    }
+
+    .ev-hdr { background:#0B1F3A; padding:14px 16px 12px; display:flex; align-items:center; gap:11px; border-radius:16px 16px 0 0; }
+    @media(max-width:768px){ .ev-hdr { border-radius:18px 18px 0 0; } }
+    .ev-hicon { width:36px; height:36px; background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.35); border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .ev-hn { color:#fff; font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; }
+    .ev-hs { color:rgba(255,255,255,0.45); font-size:9px; margin-top:2px; display:flex; align-items:center; gap:4px; letter-spacing:0.5px; }
+    .ev-dot { width:5px; height:5px; background:#4caf80; border-radius:50%; display:inline-block; flex-shrink:0; }
+    .ev-x { background:none; border:none; cursor:pointer; color:rgba(255,255,255,0.35); font-size:20px; line-height:1; padding:0; margin-left:auto; transition:color 0.15s; }
+    .ev-x:hover { color:#fff; }
+    .ev-gld { height:1px; background:linear-gradient(90deg,rgba(201,168,76,0.5),rgba(201,168,76,0.03)); }
+
+    .ev-msgs { overflow-y:auto; padding:14px 14px 8px; display:flex; flex-direction:column; gap:10px; background:#FAFAFB; min-height:190px; max-height:280px; }
+    @media(max-width:768px){ .ev-msgs { max-height:none; flex:1; } }
+    .ev-msgs::-webkit-scrollbar { width:3px; }
+    .ev-msgs::-webkit-scrollbar-thumb { background:#ddd; border-radius:3px; }
+
+    .ev-m { display:flex; gap:8px; align-items:flex-end; }
+    .ev-m.eu { flex-direction:row-reverse; }
+    .ev-av { width:26px; height:26px; background:#0B1F3A; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .ev-bbl { max-width:83%; padding:9px 12px; border-radius:12px; font-size:12.5px; line-height:1.58; color:#111827; }
+    .ev-m.eb .ev-bbl { background:#fff; border:1px solid #E6E8EC; border-bottom-left-radius:3px; }
+    .ev-m.eu .ev-bbl { background:#0B1F3A; color:#fff; border-bottom-right-radius:3px; font-size:12px; }
+
+    .ev-dots-w { display:flex; gap:4px; padding:3px 0; }
+    .ev-dots-w span { width:6px; height:6px; background:#c9a84c; border-radius:50%; animation:ev-tdot 1.2s infinite; }
+    .ev-dots-w span:nth-child(2){animation-delay:0.2s} .ev-dots-w span:nth-child(3){animation-delay:0.4s}
+
+    .ev-qs { padding:8px 12px 6px; display:flex; gap:6px; flex-wrap:wrap; background:#FAFAFB; border-top:1px solid #eee; }
+    .ev-qb { background:none; border:1px solid #0B1F3A; color:#0B1F3A; font-family:'Montserrat',sans-serif; font-size:9px; font-weight:500; letter-spacing:0.9px; text-transform:uppercase; padding:5px 10px; border-radius:20px; cursor:pointer; transition:all 0.15s; }
+    .ev-qb:hover, .ev-qb:active { background:#0B1F3A; color:#fff; }
+
+    .ev-iw { padding:10px 11px 12px; background:#fff; border-top:1px solid #ececea; display:flex; gap:7px; align-items:flex-end; }
+    @media(max-width:768px){ .ev-iw { padding-bottom:20px; } }
+    #ev-inp { flex:1; border:1px solid #E6E8EC; border-radius:8px; padding:8px 11px; font-family:'Montserrat',sans-serif; font-size:12px; color:#111827; resize:none; outline:none; line-height:1.4; max-height:78px; overflow-y:auto; background:#FAFAFB; transition:border-color 0.15s; }
+    #ev-inp:focus { border-color:#0B1F3A; }
+    #ev-inp::placeholder { color:#b0b0a8; font-size:11px; }
+    #ev-snd { width:34px; height:34px; background:#0B1F3A; border:none; border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.15s, transform 0.1s; }
+    #ev-snd:hover { background:#1a3560; }
+    #ev-snd:active { transform:scale(0.92); }
+    .ev-ftr { text-align:center; padding:4px 12px 9px; font-family:'Montserrat',sans-serif; font-size:8px; color:#c5c4bc; letter-spacing:0.8px; text-transform:uppercase; background:#fff; }
+  </style>
+
+  <div id="ev-lbl" onclick="evToggle()">Ask our AI advisor ✦</div>
+  <button id="ev-toggle" onclick="evToggle()" aria-label="Open AI Advisor">
+    <svg viewBox="0 0 44 44" width="40" height="40">
+      <text x="3" y="28" font-family="Georgia,serif" font-size="22" fill="white">E</text>
+      <text x="19" y="33" font-family="Georgia,serif" font-size="15" fill="#c9a84c" font-style="italic">v</text>
+    </svg>
+  </button>
+
+  <div id="ev-win" role="dialog" aria-label="Evolvance AI Advisor">
+    <div class="ev-hdr">
+      <div class="ev-hicon">
+        <svg viewBox="0 0 36 36" width="36" height="36">
+          <text x="2" y="24" font-family="Georgia,serif" font-size="18" fill="white">E</text>
+          <text x="15" y="28" font-family="Georgia,serif" font-size="13" fill="#c9a84c" font-style="italic">v</text>
+        </svg>
+      </div>
+      <div>
+        <div class="ev-hn">Evolvance Advisory</div>
+        <div class="ev-hs"><span class="ev-dot"></span>AI Advisor available</div>
+      </div>
+      <button class="ev-x" onclick="evToggle()" aria-label="Close">×</button>
+    </div>
+    <div class="ev-gld"></div>
+    <div class="ev-msgs" id="ev-msgs">
+      <div class="ev-m eb">
+        <div class="ev-av"><svg viewBox="0 0 26 26" width="26" height="26"><text x="1" y="18" font-family="Georgia,serif" font-size="13" fill="white">E</text><text x="10" y="21" font-family="Georgia,serif" font-size="9" fill="#c9a84c" font-style="italic">v</text></svg></div>
+        <div class="ev-bbl">Hello. I'm Evolvance Advisory's AI advisor.<br><br>How can I help you today?</div>
+      </div>
+    </div>
+    <div class="ev-qs" id="ev-qs">
+      <button class="ev-qb" data-q="What are your services?">Services</button>
+      <button class="ev-qb" data-q="Which industries do you cover?">Industries</button>
+      <button class="ev-qb" data-q="I'd like to schedule a conversation">Book a call</button>
+    </div>
+    <div class="ev-iw">
+      <textarea id="ev-inp" rows="1" placeholder="Your message..."></textarea>
+      <button id="ev-snd" aria-label="Send">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.2" stroke-linecap="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="ev-ftr">Evolvance Advisory · Powered by Claude AI</div>
+  </div>
+
+  <script>
+    // ── Chatbox logic ──
+    var evOpen=false, evHist=[], evBusy=false;
+
+    // Wiggle every 6s to attract attention
+    setInterval(function(){
+      var b=document.getElementById('ev-toggle');
+      if(b&&!evOpen){ b.style.animation='ev-wiggle 0.65s ease'; setTimeout(function(){ b.style.animation='ev-pulse 2.2s infinite'; },700); }
+    },6000);
+
+    window.evToggle=function(){
+      evOpen=!evOpen;
+      document.getElementById('ev-win').classList.toggle('ev-open',evOpen);
+      var lbl=document.getElementById('ev-lbl');
+      if(evOpen){ lbl.style.display='none'; setTimeout(function(){ var i=document.getElementById('ev-inp'); if(i)i.focus(); },300); }
+      else { lbl.style.display='block'; }
+    };
+
+    document.querySelectorAll('.ev-qb').forEach(function(b){
+      b.addEventListener('click',function(){ document.getElementById('ev-inp').value=b.dataset.q; evSend(); });
+    });
+
+    var evInp=document.getElementById('ev-inp');
+    evInp.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();evSend();} });
+    evInp.addEventListener('input',function(){ this.style.height='auto'; this.style.height=Math.min(this.scrollHeight,78)+'px'; });
+    document.getElementById('ev-snd').addEventListener('click',evSend);
+
+    function evAv(){ return '<div class="ev-av"><svg viewBox="0 0 26 26" width="26" height="26"><text x="1" y="18" font-family="Georgia,serif" font-size="13" fill="white">E</text><text x="10" y="21" font-family="Georgia,serif" font-size="9" fill="#c9a84c" font-style="italic">v</text></svg></div>'; }
+    function evEsc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    function evAdd(role,txt){
+      var c=document.getElementById('ev-msgs'), d=document.createElement('div');
+      d.className='ev-m '+(role==='user'?'eu':'eb');
+      d.innerHTML=role==='user'?'<div class="ev-bbl">'+evEsc(txt)+'</div>':evAv()+'<div class="ev-bbl">'+txt.replace(/\n/g,'<br>')+'</div>';
+      c.appendChild(d); c.scrollTop=c.scrollHeight;
+    }
+    function evTyping(){
+      var c=document.getElementById('ev-msgs'), d=document.createElement('div');
+      d.className='ev-m eb'; d.id='ev-typ';
+      d.innerHTML=evAv()+'<div class="ev-bbl"><div class="ev-dots-w"><span></span><span></span><span></span></div></div>';
+      c.appendChild(d); c.scrollTop=c.scrollHeight;
+    }
+    function evRmTyping(){ var e=document.getElementById('ev-typ'); if(e)e.remove(); }
+
+    async function evSend(){
+      if(evBusy)return;
+      var i=document.getElementById('ev-inp'), t=i.value.trim(); if(!t)return;
+      i.value=''; i.style.height='auto';
+      document.getElementById('ev-qs').style.display='none';
+      evAdd('user',t); evHist.push({role:'user',content:t});
+      evBusy=true; evTyping();
+      try{
+        var r=await fetch('/api/chat',{
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({messages:evHist})
+        });
+        var data=await r.json();
+        var rep=data.reply||"I'm momentarily unavailable. Please contact us directly.";
+        evRmTyping(); evAdd('bot',rep); evHist.push({role:'assistant',content:rep});
+      }catch(e){ evRmTyping(); evAdd('bot',"An error occurred. Please contact us directly."); }
+      evBusy=false;
+    }
+  </script>
+  <!-- ===== END CHATBOX ===== -->
+
+  <!-- ===== EVOLVANCE AI CHATBOX — coller avant </body> sur chaque page ===== -->
+  <style>
+    @keyframes ev-pulse{0%{box-shadow:0 0 0 0 rgba(201,168,76,0.6)}70%{box-shadow:0 0 0 14px rgba(201,168,76,0)}100%{box-shadow:0 0 0 0 rgba(201,168,76,0)}}
+    @keyframes ev-wiggle{0%,100%{transform:rotate(0)scale(1)}15%{transform:rotate(-8deg)scale(1.08)}30%{transform:rotate(8deg)scale(1.08)}45%{transform:rotate(-5deg)scale(1.05)}60%{transform:rotate(5deg)scale(1.05)}}
+    @keyframes ev-tdot{0%,60%,100%{transform:translateY(0);opacity:0.4}30%{transform:translateY(-5px);opacity:1}}
+    #ev-toggle{position:fixed;bottom:24px;right:24px;width:54px;height:54px;background:#0B1F3A;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(11,31,58,0.5);z-index:9999;animation:ev-pulse 2.2s infinite;padding:0}
+    #ev-lbl{position:fixed;bottom:86px;right:18px;background:#0B1F3A;color:#fff;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;padding:5px 11px;border-radius:20px;white-space:nowrap;box-shadow:0 2px 12px rgba(11,31,58,0.3);z-index:9998;animation:ev-pulse 2.2s infinite 0.6s;cursor:pointer}
+    #ev-lbl::after{content:'';position:absolute;bottom:-5px;right:16px;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid #0B1F3A}
+    #ev-win{position:fixed;bottom:90px;right:24px;width:345px;background:#fff;border-radius:16px;box-shadow:0 12px 48px rgba(11,31,58,0.16),0 2px 8px rgba(0,0,0,0.06);display:flex;flex-direction:column;overflow:hidden;z-index:9998;opacity:0;pointer-events:none;transform:translateY(14px) scale(0.97);transition:opacity 0.26s ease,transform 0.26s ease;font-family:'Montserrat',system-ui,sans-serif}
+    #ev-win.ev-open{opacity:1;pointer-events:all;transform:translateY(0) scale(1)}
+    @media(max-width:768px){
+      #ev-win{bottom:0;right:0;left:0;width:100%;max-height:88vh;border-radius:18px 18px 0 0;transform:translateY(30px)}
+      #ev-win.ev-open{transform:translateY(0)}
+      #ev-toggle{bottom:16px;right:16px;width:50px;height:50px}
+      #ev-lbl{bottom:74px;right:10px;font-size:8px}
+    }
+    .ev-hdr{background:#0B1F3A;padding:14px 16px 12px;display:flex;align-items:center;gap:11px;border-radius:16px 16px 0 0}
+    @media(max-width:768px){.ev-hdr{border-radius:18px 18px 0 0}}
+    .ev-hicon{width:36px;height:36px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ev-hn{color:#fff;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+    .ev-hs{color:rgba(255,255,255,0.45);font-size:9px;margin-top:2px;display:flex;align-items:center;gap:4px;letter-spacing:0.5px}
+    .ev-dot{width:5px;height:5px;background:#4caf80;border-radius:50%;display:inline-block;flex-shrink:0}
+    .ev-x{background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.35);font-size:20px;line-height:1;padding:0;margin-left:auto;transition:color 0.15s}
+    .ev-x:hover{color:#fff}
+    .ev-gld{height:1px;background:linear-gradient(90deg,rgba(201,168,76,0.5),rgba(201,168,76,0.03))}
+    .ev-msgs{overflow-y:auto;padding:14px 14px 8px;display:flex;flex-direction:column;gap:10px;background:#FAFAFB;min-height:190px;max-height:280px}
+    @media(max-width:768px){.ev-msgs{max-height:none;flex:1}}
+    .ev-msgs::-webkit-scrollbar{width:3px}
+    .ev-msgs::-webkit-scrollbar-thumb{background:#ddd;border-radius:3px}
+    .ev-m{display:flex;gap:8px;align-items:flex-end}
+    .ev-m.eu{flex-direction:row-reverse}
+    .ev-av{width:26px;height:26px;background:#0B1F3A;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ev-bbl{max-width:83%;padding:9px 12px;border-radius:12px;font-size:12.5px;line-height:1.58;color:#111827}
+    .ev-m.eb .ev-bbl{background:#fff;border:1px solid #E6E8EC;border-bottom-left-radius:3px}
+    .ev-m.eu .ev-bbl{background:#0B1F3A;color:#fff;border-bottom-right-radius:3px;font-size:12px}
+    .ev-dots-w{display:flex;gap:4px;padding:3px 0}
+    .ev-dots-w span{width:6px;height:6px;background:#c9a84c;border-radius:50%;animation:ev-tdot 1.2s infinite}
+    .ev-dots-w span:nth-child(2){animation-delay:0.2s}.ev-dots-w span:nth-child(3){animation-delay:0.4s}
+    .ev-qs{padding:8px 12px 6px;display:flex;gap:6px;flex-wrap:wrap;background:#FAFAFB;border-top:1px solid #eee}
+    .ev-qb{background:none;border:1px solid #0B1F3A;color:#0B1F3A;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:500;letter-spacing:0.9px;text-transform:uppercase;padding:5px 10px;border-radius:20px;cursor:pointer;transition:all 0.15s}
+    .ev-qb:hover,.ev-qb:active{background:#0B1F3A;color:#fff}
+    .ev-iw{padding:10px 11px 12px;background:#fff;border-top:1px solid #ececea;display:flex;gap:7px;align-items:flex-end}
+    @media(max-width:768px){.ev-iw{padding-bottom:20px}}
+    #ev-inp{flex:1;border:1px solid #E6E8EC;border-radius:8px;padding:8px 11px;font-family:'Montserrat',sans-serif;font-size:12px;color:#111827;resize:none;outline:none;line-height:1.4;max-height:78px;overflow-y:auto;background:#FAFAFB;transition:border-color 0.15s}
+    #ev-inp:focus{border-color:#0B1F3A}
+    #ev-inp::placeholder{color:#b0b0a8;font-size:11px}
+    #ev-snd{width:34px;height:34px;background:#0B1F3A;border:none;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s,transform 0.1s}
+    #ev-snd:hover{background:#1a3560}
+    #ev-snd:active{transform:scale(0.92)}
+    .ev-ftr{text-align:center;padding:4px 12px 9px;font-family:'Montserrat',sans-serif;font-size:8px;color:#c5c4bc;letter-spacing:0.8px;text-transform:uppercase;background:#fff}
+  </style>
+
+  <div id="ev-lbl" onclick="evToggle()">Ask our AI advisor ✦</div>
+  <button id="ev-toggle" onclick="evToggle()" aria-label="Open AI Advisor">
+    <svg viewBox="0 0 44 44" width="40" height="40"><text x="3" y="28" font-family="Georgia,serif" font-size="22" fill="white">E</text><text x="19" y="33" font-family="Georgia,serif" font-size="15" fill="#c9a84c" font-style="italic">v</text></svg>
+  </button>
+
+  <div id="ev-win" role="dialog" aria-label="Evolvance AI Advisor">
+    <div class="ev-hdr">
+      <div class="ev-hicon"><svg viewBox="0 0 36 36" width="36" height="36"><text x="2" y="24" font-family="Georgia,serif" font-size="18" fill="white">E</text><text x="15" y="28" font-family="Georgia,serif" font-size="13" fill="#c9a84c" font-style="italic">v</text></svg></div>
+      <div><div class="ev-hn">Evolvance Advisory</div><div class="ev-hs"><span class="ev-dot"></span>AI Advisor available</div></div>
+      <button class="ev-x" onclick="evToggle()" aria-label="Close">×</button>
+    </div>
+    <div class="ev-gld"></div>
+    <div class="ev-msgs" id="ev-msgs">
+      <div class="ev-m eb">
+        <div class="ev-av"><svg viewBox="0 0 26 26" width="26" height="26"><text x="1" y="18" font-family="Georgia,serif" font-size="13" fill="white">E</text><text x="10" y="21" font-family="Georgia,serif" font-size="9" fill="#c9a84c" font-style="italic">v</text></svg></div>
+        <div class="ev-bbl">Hello. I'm Evolvance Advisory's AI advisor.<br><br>How can I help you today?</div>
+      </div>
+    </div>
+    <div class="ev-qs" id="ev-qs">
+      <button class="ev-qb" data-q="What are your services?">Services</button>
+      <button class="ev-qb" data-q="Which industries do you cover?">Industries</button>
+      <button class="ev-qb" data-q="I'd like to schedule a conversation">Book a call</button>
+    </div>
+    <div class="ev-iw">
+      <textarea id="ev-inp" rows="1" placeholder="Your message..."></textarea>
+      <button id="ev-snd" aria-label="Send"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2.2" stroke-linecap="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="ev-ftr">Evolvance Advisory · Powered by Claude AI</div>
+  </div>
+
+  <script>
+    var evOpen=false,evHist=[],evBusy=false;
+    setInterval(function(){var b=document.getElementById('ev-toggle');if(b&&!evOpen){b.style.animation='ev-wiggle 0.65s ease';setTimeout(function(){b.style.animation='ev-pulse 2.2s infinite';},700);}},6000);
+    window.evToggle=function(){evOpen=!evOpen;document.getElementById('ev-win').classList.toggle('ev-open',evOpen);var l=document.getElementById('ev-lbl');if(evOpen){l.style.display='none';setTimeout(function(){var i=document.getElementById('ev-inp');if(i)i.focus();},300);}else{l.style.display='block';}};
+    document.querySelectorAll('.ev-qb').forEach(function(b){b.addEventListener('click',function(){document.getElementById('ev-inp').value=b.dataset.q;evSend();});});
+    var evI=document.getElementById('ev-inp');
+    evI.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();evSend();}});
+    evI.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,78)+'px';});
+    document.getElementById('ev-snd').addEventListener('click',evSend);
+    function evAv(){return '<div class="ev-av"><svg viewBox="0 0 26 26" width="26" height="26"><text x="1" y="18" font-family="Georgia,serif" font-size="13" fill="white">E</text><text x="10" y="21" font-family="Georgia,serif" font-size="9" fill="#c9a84c" font-style="italic">v</text></svg></div>';}
+    function evEsc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+    function evAdd(role,txt){var c=document.getElementById('ev-msgs'),d=document.createElement('div');d.className='ev-m '+(role==='user'?'eu':'eb');d.innerHTML=role==='user'?'<div class="ev-bbl">'+evEsc(txt)+'</div>':evAv()+'<div class="ev-bbl">'+txt.replace(/\n/g,'<br>')+'</div>';c.appendChild(d);c.scrollTop=c.scrollHeight;}
+    function evTyping(){var c=document.getElementById('ev-msgs'),d=document.createElement('div');d.className='ev-m eb';d.id='ev-typ';d.innerHTML=evAv()+'<div class="ev-bbl"><div class="ev-dots-w"><span></span><span></span><span></span></div></div>';c.appendChild(d);c.scrollTop=c.scrollHeight;}
+    function evRm(){var e=document.getElementById('ev-typ');if(e)e.remove();}
+    async function evSend(){if(evBusy)return;var i=document.getElementById('ev-inp'),t=i.value.trim();if(!t)return;i.value='';i.style.height='auto';document.getElementById('ev-qs').style.display='none';evAdd('user',t);evHist.push({role:'user',content:t});evBusy=true;evTyping();try{var r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:evHist})});var d=await r.json();var rep=d.reply||"I'm momentarily unavailable. Please contact us directly.";evRm();evAdd('bot',rep);evHist.push({role:'assistant',content:rep});}catch(e){evRm();evAdd('bot',"An error occurred. Please contact us directly.");}evBusy=false;}
+  </script>
+  <!-- ===== END CHATBOX ===== -->
+
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const dots = document.querySelectorAll('.scroll-dot');
+    const tabOrder = ['philosophy','values','leadership'];
+
+    function updateDots(panelId) {
+      const idx = tabOrder.indexOf(panelId);
+      dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.panel;
+        const current = document.querySelector('.panel.active');
+        const next = document.getElementById('panel-' + target);
+        if (current === next) return;
+
+        current.style.transition = 'opacity 0.18s ease, transform 0.18s ease';
+        current.style.transform = 'translateY(-10px)';
+        current.style.opacity = '0';
+
+        setTimeout(() => {
+          current.classList.remove('active');
+          current.style.transition = '';
+          current.style.transform = '';
+          current.style.opacity = '';
+
+          next.classList.add('active');
+          next.style.opacity = '0';
+          next.style.transform = 'translateY(12px)';
+          next.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            next.style.opacity = '1';
+            next.style.transform = 'translateY(0)';
+          }));
+
+          setTimeout(() => {
+            next.style.transition = '';
+            next.style.transform = '';
+            next.style.opacity = '';
+          }, 250);
+        }, 180);
+
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        updateDots(target);
+      });
+    });
+  </script>
+</body>
+</html>
