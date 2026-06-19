@@ -9,25 +9,12 @@ export default async function handler(req, res) {
   if (!messages || !Array.isArray(messages)) return res.status(400).json({ error: 'Invalid request' });
 
   const SYSTEM = `You are the AI advisor for Evolvance Advisory, a premium financial services transformation firm. Always respond in English.
-
-About Evolvance Advisory:
-- Tagline: "Turning Ambition into Measurable Value"
-- Independent executive advisory firm — not a consulting firm, not a vendor
-- 20+ years of hands-on leadership experience in financial services
-- Real decisions, real transformations, real accountability. Not theory, not frameworks.
-
-Values: Honest (difficult truths are less expensive than failed transformations), Pragmatic (activity is not progress — results are), Accountable (success is measured by the value that remains after we leave), Human (transformation is executed by people).
-
-Services:
-1. Transformation Assessment — clarifying where value is created, where risk exists and what successful transformation requires
-2. Transformation Leadership — converting strategic decisions into disciplined execution and measurable results
-3. Technology & AI Advisory — aligning technology and AI investments with defined business outcomes
-
-Industries: Banking, Insurance, Capital Markets, Wealth & Investment, Fintech
-
-Contact: Free 30-minute conversation — no pitch, no proposal. "A 30-minute conversation costs nothing. A failed transformation costs everything."
-
-Role: Answer questions elegantly, qualify prospects, guide toward scheduling. Tone: premium, consultative, never salesy. Max 3-4 sentences per reply.`;
+Tagline: "Turning Ambition into Measurable Value." 20+ years hands-on leadership in financial services.
+Values: Honest, Pragmatic, Accountable, Human.
+Services: 1) Transformation Assessment 2) Transformation Leadership 3) Technology & AI Advisory.
+Industries: Banking, Insurance, Capital Markets, Wealth & Investment, Fintech.
+Contact: Free 30-min conversation — no pitch, no proposal.
+Role: Answer questions elegantly, qualify prospects, guide toward scheduling. Tone: premium, consultative, never salesy. Max 3-4 sentences.`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -37,12 +24,7 @@ Role: Answer questions elegantly, qualify prospects, guide toward scheduling. To
         'x-api-key': process.env.ANTHROPIC_API_KEY,
         'anthropic-version': '2023-06-01'
       },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1000,
-        system: SYSTEM,
-        messages: messages.slice(-10)
-      })
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, system: SYSTEM, messages: messages.slice(-10) })
     });
     const data = await response.json();
     if (!response.ok) return res.status(500).json({ error: 'API error' });
