@@ -263,7 +263,7 @@
             <div class="value-item"><span class="value-name">Honest</span><span class="value-desc">Reality does not change when it is ignored. Difficult truths are always less expensive than failed transformations.</span></div>
             <div class="value-item"><span class="value-name">Pragmatic</span><span class="value-desc">We focus on what works, not what looks good. Activity is not progress. Results are.</span></div>
             <div class="value-item"><span class="value-name">Accountable</span><span class="value-desc">Our success is measured by the value that remains after we leave — not the projects we launch.</span></div>
-            <div class="value-item"><span class="value-name">Human</span><span class="value-desc">Transformation is executed by people. We place people at the center of every engagement.</span></div>
+            <div class="value-item"><span class="value-name">Hands-On</span><span class="value-desc">Transformation is executed by people. We place people at the center of every engagement.</span></div>
           </div>
         </div>
       </div>
@@ -278,6 +278,9 @@
               <p>These are not words on a wall. They are the principles that guide every conversation, every recommendation and every engagement.</p>
               <p>We believe transformation is not the objective. Value creation is. And that belief shapes everything we do.</p>
             </div>
+          </div>
+          <div class="quote-block">
+            <p class="quote-text">"If the value created does not exceed the cost of change, it has failed."</p>
           </div>
         </div>
         <div class="panel-right">
@@ -299,10 +302,13 @@
             <span class="panel-label">Leadership</span>
             <h2 class="panel-title">The people<br><em>behind the work.</em></h2>
             <div class="panel-body">
-              <p>Evolvance Advisory is led by a practitioner — not a theorist. Someone who has made the decisions, led the transformations and lived the accountability.</p>
-              <p>20+ years of executive leadership across financial services — working with Tier-1 financial institutions across Europe and beyond. From strategy to execution. From the boardroom to the front line.</p>
+              <p>Evolvance Advisory is led by practitioners — not theorists. People who have made the decisions, led the transformations and lived the accountability.</p>
+              <p>20+ years of combined executive leadership across financial services — working with Tier-1 financial institutions across Europe and beyond. From strategy to execution. From the boardroom to the front line.</p>
               <p>Board-level experience. Enterprise-scale transformations. A track record built on results, not reports.</p>
             </div>
+          </div>
+          <div class="quote-block">
+            <p class="quote-text">"We do not deliver theories. We help turn them into reality."</p>
           </div>
         </div>
         <div class="panel-right">
@@ -389,7 +395,7 @@
     });
   </script>
   <!-- ===== EVOLVANCE AI CHATBOX ===== -->
-  <style>
+    <style>
     @keyframes ev-pulse{0%{box-shadow:0 0 0 0 rgba(201,168,76,0.6)}70%{box-shadow:0 0 0 14px rgba(201,168,76,0)}100%{box-shadow:0 0 0 0 rgba(201,168,76,0)}}
     @keyframes ev-wiggle{0%,100%{transform:rotate(0)scale(1)}15%{transform:rotate(-8deg)scale(1.08)}30%{transform:rotate(8deg)scale(1.08)}45%{transform:rotate(-5deg)scale(1.05)}60%{transform:rotate(5deg)scale(1.05)}}
     @keyframes ev-tdot{0%,60%,100%{transform:translateY(0);opacity:0.4}30%{transform:translateY(-5px);opacity:1}}
@@ -429,6 +435,16 @@
     #ev-snd{width:34px;height:34px;background:#0B1F3A;border:none;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s,transform 0.1s}
     #ev-snd:hover{background:#1a3560}#ev-snd:active{transform:scale(0.92)}
     .ev-ftr{text-align:center;padding:4px 12px 9px;font-family:"Montserrat",sans-serif;font-size:8px;color:#c5c4bc;letter-spacing:0.8px;text-transform:uppercase;background:#fff}
+    .ev-lead{background:#fff;border:1px solid #E6E8EC;border-radius:12px;padding:12px;margin-top:2px}
+    .ev-lead-row{margin-bottom:8px}
+    .ev-lead-row:last-of-type{margin-bottom:10px}
+    .ev-lead label{display:block;font-family:"Montserrat",sans-serif;font-size:9px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:#0B1F3A;margin-bottom:4px}
+    .ev-lead input{width:100%;border:1px solid #E6E8EC;border-radius:7px;padding:7px 10px;font-family:"Montserrat",sans-serif;font-size:12px;color:#111827;outline:none;background:#FAFAFB;box-sizing:border-box}
+    .ev-lead input:focus{border-color:#0B1F3A}
+    .ev-lead-btn{width:100%;background:#0B1F3A;color:#fff;border:none;border-radius:8px;padding:9px;font-family:"Montserrat",sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background 0.15s}
+    .ev-lead-btn:hover{background:#1a3560}
+    .ev-lead-skip{width:100%;background:none;border:none;color:#9a9a92;font-family:"Montserrat",sans-serif;font-size:9.5px;text-align:center;padding:7px 0 0;cursor:pointer;text-decoration:underline}
+    .ev-lead-success{font-family:"Montserrat",sans-serif;font-size:12px;color:#0B1F3A;text-align:center;padding:6px 4px}
   </style>
 
   <div id="ev-lbl" onclick="evToggle()">Ask our AI advisor ✦</div>
@@ -446,7 +462,7 @@
     <div class="ev-msgs" id="ev-msgs">
       <div class="ev-m eb">
         <div class="ev-av"><svg viewBox="0 0 26 26" width="26" height="26"><text x="1" y="18" font-family="Georgia,serif" font-size="13" fill="white">E</text><text x="10" y="21" font-family="Georgia,serif" font-size="9" fill="#c9a84c" font-style="italic">v</text></svg></div>
-        <div class="ev-bbl">Hello. I'm Evolvance Advisory's AI advisor.<br><br>How can I help you today?</div>
+        <div class="ev-bbl">Hey there! Happy to help with anything Evolvance ✦</div>
       </div>
     </div>
     <div class="ev-qs" id="ev-qs">
@@ -462,7 +478,7 @@
   </div>
 
   <script>
-    var evOpen=false,evHist=[],evBusy=false;
+    var evOpen=false,evHist=[],evBusy=false,evMsgCount=0,evLeadShown=false,evLeadCaptured=false;
     setInterval(function(){var b=document.getElementById('ev-toggle');if(b&&!evOpen){b.style.animation='ev-wiggle 0.65s ease';setTimeout(function(){b.style.animation='ev-pulse 2.2s infinite';},700);}},6000);
     window.evToggle=function(){evOpen=!evOpen;document.getElementById('ev-win').classList.toggle('ev-open',evOpen);var l=document.getElementById('ev-lbl');if(evOpen){l.style.display='none';setTimeout(function(){var i=document.getElementById('ev-inp');if(i)i.focus();},300);}else{l.style.display='block';}};
     document.querySelectorAll('.ev-qb').forEach(function(b){b.addEventListener('click',function(){document.getElementById('ev-inp').value=b.dataset.q;evSend();});});
@@ -475,9 +491,62 @@
     function evAdd(role,txt){var c=document.getElementById('ev-msgs'),d=document.createElement('div');d.className='ev-m '+(role==='user'?'eu':'eb');d.innerHTML=role==='user'?'<div class="ev-bbl">'+evEsc(txt)+'</div>':evAv()+'<div class="ev-bbl">'+txt.replace(/\n/g,'<br>')+'</div>';c.appendChild(d);c.scrollTop=c.scrollHeight;}
     function evTyping(){var c=document.getElementById('ev-msgs'),d=document.createElement('div');d.className='ev-m eb';d.id='ev-typ';d.innerHTML=evAv()+'<div class="ev-bbl"><div class="ev-dots-w"><span></span><span></span><span></span></div></div>';c.appendChild(d);c.scrollTop=c.scrollHeight;}
     function evRm(){var e=document.getElementById('ev-typ');if(e)e.remove();}
-    async function evSend(){if(evBusy)return;var i=document.getElementById('ev-inp'),t=i.value.trim();if(!t)return;i.value='';i.style.height='auto';document.getElementById('ev-qs').style.display='none';evAdd('user',t);evHist.push({role:'user',content:t});evBusy=true;evTyping();try{var r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:evHist})});var d=await r.json();var rep=d.reply||"I'm momentarily unavailable. Please contact us directly.";evRm();evAdd('bot',rep);evHist.push({role:'assistant',content:rep});}catch(e){evRm();evAdd('bot',"An error occurred. Please contact us directly.");}evBusy=false;}
+
+    function evShowLeadForm(){
+      if(evLeadShown||evLeadCaptured)return;
+      evLeadShown=true;
+      var c=document.getElementById('ev-msgs'),d=document.createElement('div');
+      d.className='ev-m eb';d.id='ev-leadform';
+      d.innerHTML=evAv()+'<div class="ev-lead">'
+        +'<div class="ev-lead-row"><label>Name</label><input type="text" id="ev-lead-name" placeholder="Your name"></div>'
+        +'<div class="ev-lead-row"><label>Company</label><input type="text" id="ev-lead-company" placeholder="Your company"></div>'
+        +'<div class="ev-lead-row"><label>Email</label><input type="email" id="ev-lead-email" placeholder="you@company.com"></div>'
+        +'<button class="ev-lead-btn" id="ev-lead-submit">Send my details</button>'
+        +'<button class="ev-lead-skip" id="ev-lead-skip">No thanks, continue chatting</button>'
+        +'</div>';
+      c.appendChild(d);c.scrollTop=c.scrollHeight;
+      document.getElementById('ev-lead-skip').addEventListener('click',function(){d.remove();});
+      document.getElementById('ev-lead-submit').addEventListener('click',evSubmitLead);
+    }
+
+    async function evSubmitLead(){
+      var name=document.getElementById('ev-lead-name').value.trim();
+      var company=document.getElementById('ev-lead-company').value.trim();
+      var email=document.getElementById('ev-lead-email').value.trim();
+      if(!name||!email){alert('Please fill in at least your name and email.');return;}
+      var btn=document.getElementById('ev-lead-submit');
+      btn.disabled=true;btn.textContent='Sending...';
+      try{
+        await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,company:company,email:email,conversation:evHist})});
+        var formEl=document.getElementById('ev-leadform');
+        formEl.querySelector('.ev-lead').innerHTML='<div class="ev-lead-success">Thank you, '+evEsc(name)+'. Our team will reach out shortly.</div>';
+        evLeadCaptured=true;
+      }catch(e){
+        btn.disabled=false;btn.textContent='Send my details';
+        alert('Something went wrong. Please try again or email us directly.');
+      }
+    }
+
+    async function evSend(){
+      if(evBusy)return;
+      var i=document.getElementById('ev-inp'),t=i.value.trim();if(!t)return;
+      i.value='';i.style.height='auto';
+      document.getElementById('ev-qs').style.display='none';
+      evAdd('user',t);evHist.push({role:'user',content:t});
+      evMsgCount++;
+      evBusy=true;evTyping();
+      try{
+        var r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:evHist})});
+        var d=await r.json();
+        var rep=d.reply||"I'm momentarily unavailable. Please contact us directly.";
+        var showLead=false;
+        if(rep.indexOf('[[SHOW_LEAD_FORM]]')!==-1){showLead=true;rep=rep.replace('[[SHOW_LEAD_FORM]]','').trim();}
+        evRm();evAdd('bot',rep);evHist.push({role:'assistant',content:rep});
+        if(showLead||(evMsgCount>=3&&!evLeadShown&&!evLeadCaptured)){evShowLeadForm();}
+      }catch(e){evRm();evAdd('bot',"An error occurred. Please contact us directly.");}
+      evBusy=false;
+    }
   </script>
-  <!-- ===== END CHATBOX ===== -->
 
 </body>
 </html>
