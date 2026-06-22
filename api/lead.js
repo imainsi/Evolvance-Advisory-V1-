@@ -24,6 +24,7 @@ export default async function handler(req, res) {
   `;
 
   try {
+    // Email à l'équipe Evolvance
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -31,7 +32,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
       },
       body: JSON.stringify({
-        from: 'Evolvance AI Advisor <onboarding@resend.dev>',
+        from: 'Evolvance Advisory <contact@evolvance-advisory.com>',
         to: ['contact@evolvance-advisory.com'],
         reply_to: email,
         subject: `New lead from AI advisor — ${name}${company ? ' (' + company + ')' : ''}`,
@@ -44,6 +45,35 @@ export default async function handler(req, res) {
       console.error('Resend error:', errData);
       return res.status(500).json({ error: 'Failed to send email' });
     }
+
+    // Email de confirmation au visiteur
+    const firstName = name.split(' ')[0];
+    const confirmationHtml = `
+      <p>Hi ${escapeHtml(firstName)},</p>
+      <p>Thank you for reaching out and for your interest in Evolvance Advisory.</p>
+      <p>We've received your details and one of our team members will be in touch with you shortly. We look forward to learning more about your organization and exploring how we can help you navigate transformation and turn ambition into measurable value.</p>
+      <p>In the meantime, feel free to reply to this email if you'd like to share any additional details about your project or priorities — we'd love to hear more.</p>
+      <p>You can also explore our website at <a href="https://www.evolvance-advisory.com">evolvance-advisory.com</a> to learn more about our services and the industries we serve.</p>
+      <p>Speak soon.</p>
+      <p><strong>The Evolvance Advisory Team</strong><br><em>Turning Ambition into Measurable Value.</em></p>
+      <hr>
+      <p style="font-size:12px;color:#888;">This is an automated confirmation. A member of our team will follow up with you personally.</p>
+    `;
+
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
+      },
+      body: JSON.stringify({
+        from: 'Evolvance Advisory <contact@evolvance-advisory.com>',
+        to: [email],
+        reply_to: 'contact@evolvance-advisory.com',
+        subject: 'Thank you for reaching out — Evolvance Advisory',
+        html: confirmationHtml
+      })
+    });
 
     return res.status(200).json({ success: true });
   } catch (err) {
